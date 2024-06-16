@@ -2,18 +2,31 @@ name: Detect New Commit
 
 on: push
 
+
 jobs:
+
+  
+
   run_script:
     runs-on: ubuntu-latest
 
     steps:
+    - name: "Checker"
+      id: check_condition
+      if: github.event_name == 'push' && github.actor == 'github-actions[bot]'
+      run: echo "stop"
+      continue-on-error: true  # Allows the workflow to continue even if this step runs
+
     - name: Checkout repository
+      if: steps.check_condition.outcome != 'success'  # Only runs if the condition step did not run
       uses: actions/checkout@v4
       
     - name: Set up Node.js
+      if: steps.check_condition.outcome != 'success'  # Only runs if the condition step did not run
       uses: actions/setup-node@v4
       with:
-        node-version: '20'  # Specify the Node.js version you need
+        node-version: '20'
 
     - name: Run .github/workflows/test.js
+      if: steps.check_condition.outcome != 'success'  # Only runs if the condition step did not run
       run: node .github/workflows/test.js
