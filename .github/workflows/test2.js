@@ -10,44 +10,23 @@ const endpoint = 'https://api.github.com/graphql';
 // GraphQL query to fetch commit details
 const query = `
   query($owner: String!, $repo: String!, $sha: GitObjectID!) {
-    repository(owner: $owner, name: $repo) {
-      object(oid: $sha) {
-        ... on Commit {
-          message
-          committedDate
-          author {
-            name
-            email
-          }
-          changedFiles
-          associatedPullRequests(first: 5) {
-            nodes {
-              title
-              url
-            }
-          }
-          additions
-          deletions
-          history(first: 1) {
-            edges {
-              node {
-                changedFiles
-                files(first: 10) {
-                  nodes {
-                    path
-                    additions
-                    deletions
-                    changes
-                    blobUrl
-                  }
-                }
-              }
-            }
-          }
+  repository(owner: $owner, name: $repo) {
+    object(oid: $sha) {
+      ... on Commit {
+        message
+        committedDate
+        author {
+          name
+          email
         }
+        changedFiles
+        additions
+        deletions
       }
     }
   }
+}
+
 `;
 
 
