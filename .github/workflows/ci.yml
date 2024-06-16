@@ -19,7 +19,7 @@ jobs:
         node-version: '20'
 
     - name: Run JavaScript script
-      run: node .github/workflows/conditional-script.js
+      run: node .github/workflows/test.js
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GITHUB_REPOSITORY: ${{ github.repository }}
