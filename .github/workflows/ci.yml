@@ -3,12 +3,17 @@ name: Detect New Commit
 on: push
 
 jobs:
-  notify:
+  run_script:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+      
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'  # Specify the Node.js version you need
 
-    - name: Notify about new commit
-      run: echo "curl https://selective-proud-club.glitch.me/"
+    - name: Run test.js
+      run: node test.js
