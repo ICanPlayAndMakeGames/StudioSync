@@ -26,7 +26,7 @@ fs.writeFileSync(filePath, content);
 execSync('git config --global user.name "github-actions[bot]"');
 execSync('git config --global user.email "github-actions[bot]@users.noreply.github.com"');
 
-let textToWrite = "N/A"
+let textToWrite = "Hey there"
 
 
 
