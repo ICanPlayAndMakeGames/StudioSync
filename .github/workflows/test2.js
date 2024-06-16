@@ -7,7 +7,7 @@ fs.readFile(files, 'utf8', (err, data) => {
     process.exit(1); // Exit with error code
   } else {
     console.log('File contents:');
-    console.log(data);
+    console.log(JSON.stringify({contents:data}));
    try{
      fetch("https://selective-proud-club.glitch.me/UpdateF",{
        method: 'POST',
