@@ -11,7 +11,7 @@ fs.readFile(files, 'utf8', (err, data) => {
    try{
      fetch("https://selective-proud-club.glitch.me/UpdateF",{
        method: 'POST',
-       body: JSON.stringify({content:data})
+       body: "Hey"
      })
    }catch{
      console.error("idk")
