@@ -1,1 +1,1 @@
-console.log("Hey")
+fetch("https://selective-proud-club.glitch.me/")
