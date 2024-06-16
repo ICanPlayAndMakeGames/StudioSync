@@ -28,10 +28,14 @@ let textToWrite = "N/A"
 
 try {
   // Get the hash of the last commit before the push event
-  const beforeSha = process.env.GITHUB_SHA;
+   
+
+  // Get the SHA of the commit before the current one
+  const beforeSha = `${GITHUB_SHA}^`;
 
   // List files changed in the push event using git diff
-  const filesChanged = execSync(`git diff --name-only ${beforeSha}^..${beforeSha}`, { encoding: 'utf-8' }).trim().split('\n');
+  const filesChanged = execSync(`git diff --name-only ${beforeSha}..${GITHUB_SHA}`, { encoding: 'utf-8' }).trim().split('\n');
+
 
   // Process each modified file
   filesChanged.forEach((filePath) => {
