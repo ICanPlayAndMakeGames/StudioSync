@@ -23,6 +23,13 @@ jobs:
     - name: Get Changed Files
       uses: tj-actions/changed-files@v44.5.2
       
+    - name: List all changed files
+      env:
+          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+      run: |
+          for file in ${ALL_CHANGED_FILES}; do
+            echo "$file was changed"
+          done
       
     - name: Run JavaScript script
       run: node .github/workflows/test2.js
