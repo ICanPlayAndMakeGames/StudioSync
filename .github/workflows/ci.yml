@@ -1,4 +1,4 @@
- name: Detect New Commit
+name: Detect New Commit
 
 on: push
 
@@ -11,4 +11,4 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Notify about new commit
-      run: echo "New commit detected: ${{ github.event.head_commit.message }}"
+      run: echo "New commit detected ${{ github.event.head_commit.message }}"
