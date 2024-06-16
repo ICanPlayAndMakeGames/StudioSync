@@ -1,7 +1,7 @@
 
 // Replace with your GitHub repository information
-const owner = 'your-username';
-const repo = 'your-repo-name';
+const owner = 'ICanPlayAndMakeGames';
+const repo = 'TestIFFT';
 const sha = process.env.GITHUB_SHA;
 
 // GitHub GraphQL endpoint
@@ -9,28 +9,28 @@ const endpoint = 'https://api.github.com/graphql';
 
 // GraphQL query to fetch commit details
 const query = `
-  query($owner: String!, $repo: String!, $sha: String!) {
+  query($owner: String!, $repo: String!, $sha: GitObjectID!) {
     repository(owner: $owner, name: $repo) {
       object(oid: $sha) {
         ... on Commit {
+          message
+          committedDate
+          author {
+            name
+            email
+          }
+          changedFiles
+          associatedPullRequests(first: 5) {
+            nodes {
+              title
+              url
+            }
+          }
+          additions
+          deletions
           history(first: 1) {
             edges {
               node {
-                message
-                committedDate
-                author {
-                  name
-                  email
-                }
-                changedFiles
-                associatedPullRequests(first: 5) {
-                  nodes {
-                    title
-                    url
-                  }
-                }
-                additions
-                deletions
                 changedFiles
                 files(first: 10) {
                   nodes {
@@ -49,6 +49,7 @@ const query = `
     }
   }
 `;
+
 
 async function fetchCommitInfo() {
   try {
