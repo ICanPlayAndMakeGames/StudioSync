@@ -31,7 +31,7 @@ try {
   const beforeSha = process.env.GITHUB_SHA;
 
   // List files changed in the push event using git diff
-  const filesChanged = execSync(`git diff -name-only ${beforeSha}^..${beforeSha}`, { encoding: 'utf-8' }).trim().split('\n');
+  const filesChanged = execSync(`git diff --name-only ${beforeSha}^..${beforeSha}`, { encoding: 'utf-8' }).trim().split('\n');
 
   // Process each modified file
   filesChanged.forEach((filePath) => {
