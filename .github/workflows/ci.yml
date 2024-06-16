@@ -1,37 +1,29 @@
-name: Detect New Commit
+name: Detect Commit
 
 on: push
 
+permissions:
+  contents: write  # Grant write permissions to the GITHUB_TOKEN
 
 jobs:
-
-  
-
-  run_script:
+  conditional_execution:
     runs-on: ubuntu-latest
 
     steps:
-    - name: "Checker"
-      id: check_condition
-      if: github.event_name == 'push' && github.actor == 'github-actions[bot]'
-      run: echo "stop"
-      continue-on-error: true  # Allows the workflow to continue even if this step runs
-
     - name: Checkout repository
-      if: steps.check_condition.outcome != 'success'  # Only runs if the condition step did not run
       uses: actions/checkout@v4
-      
+
     - name: Set up Node.js
-      if: steps.check_condition.outcome != 'success'  # Only runs if the condition step did not run
       uses: actions/setup-node@v4
       with:
         node-version: '20'
 
-    - name: Run .github/workflows/test.js
-      if: steps.check_condition.outcome != 'success'  # Only runs if the condition step did not run
-      run: node .github/workflows/test.js
+    - name: Run JavaScript script
+      run: node .github/workflows/conditional-script.js
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GITHUB_REPOSITORY: ${{ github.repository }}
         GITHUB_ACTOR: ${{ github.actor }}
         GITHUB_EVENT_NAME: ${{ github.event_name }}
+        GITHUB_REF: ${{ github.ref }}
+        GITHUB_SHA: ${{ github.sha }}
