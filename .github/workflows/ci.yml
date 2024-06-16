@@ -30,3 +30,8 @@ jobs:
     - name: Run .github/workflows/test.js
       if: steps.check_condition.outcome != 'success'  # Only runs if the condition step did not run
       run: node .github/workflows/test.js
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_REPOSITORY: ${{ github.repository }}
+        GITHUB_ACTOR: ${{ github.actor }}
+        GITHUB_EVENT_NAME: ${{ github.event_name }}
