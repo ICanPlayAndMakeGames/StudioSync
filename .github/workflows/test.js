@@ -9,6 +9,8 @@ const GITHUB_EVENT_NAME = process.env.GITHUB_EVENT_NAME;
 const GITHUB_REF = process.env.GITHUB_REF;
 const GITHUB_SHA = process.env.GITHUB_SHA;
 
+console.log(GITHUB_REF)
+
 // Check if the push event is from the github-actions[bot]
 if (GITHUB_EVENT_NAME === 'push' && GITHUB_ACTOR === 'github-actions[bot]') {
   console.log('Stop execution: Push event from github-actions[bot]');
