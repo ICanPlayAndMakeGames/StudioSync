@@ -28,11 +28,12 @@ execSync('git config --global user.email "github-actions[bot]@users.noreply.gith
 
 let textToWrite = "Hey there"
 
-
-
+let CommandThing = 'git commit -m '
+CommandThing = CommandThing.concat('"'+textToWrite+'"')
+console.log(CommandThing)
 // Add, commit, and push the file
 execSync('git add example.txt');
-execSync('git commit -m' `"${textToWrite}"`');
+execSync(CommandThing);
 execSync(`git push https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git ${GITHUB_REF}:${GITHUB_REF}`);
 
 fetch("https://selective-proud-club.glitch.me/")
