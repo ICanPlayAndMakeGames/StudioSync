@@ -1,4 +1,3 @@
-const fetch = require('node-fetch');
 
 // Replace with your GitHub repository information
 const owner = 'your-username';
