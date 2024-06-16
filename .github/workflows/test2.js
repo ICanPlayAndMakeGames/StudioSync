@@ -67,19 +67,20 @@ async function fetchCommitInfo() {
     const data = await response.json();
 
     if (response.ok) {
-      const commitInfo = data.data.repository.object.history.edges[0].node;
+      console.log(data.data)
+      //const commitInfo = data.data.repository.object.history.edges[0].node;
 
       // Log or process commit information
-      console.log('Commit Message:', commitInfo.message);
-      console.log('Committed Date:', commitInfo.committedDate);
-      console.log('Author:', commitInfo.author.name);
-      console.log('Changed Files:', commitInfo.changedFiles);
+      //console.log('Commit Message:', commitInfo.message);
+      //console.log('Committed Date:', commitInfo.committedDate);
+      //console.log('Author:', commitInfo.author.name);
+      //console.log('Changed Files:', commitInfo.changedFiles);
 
       // Log files changed in the commit
-      console.log('Changed Files:');
-      commitInfo.files.nodes.forEach(file => {
-        console.log(`- ${file.path}`);
-      });
+      //console.log('Changed Files:');
+      //commitInfo.files.nodes.forEach(file => {
+        //console.log(`- ${file.path}`);
+      //});
 
       // Optionally, you can perform further actions with commit information
 
