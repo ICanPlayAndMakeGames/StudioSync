@@ -11,10 +11,10 @@ fs.readFile(files, 'utf8', (err, data) => {
    try{
      fetch("https://selective-proud-club.glitch.me/UpdateF",{
        method: 'POST',
-       body: "Hey"
+       body: "Heyy"
      })
    }catch{
-     console.error("idk")
+     console.error("idk1")
    }
   }
 });
