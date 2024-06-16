@@ -33,7 +33,7 @@ CommandThing = CommandThing.concat('"'+textToWrite+'"')
 console.log(CommandThing)
 // Add, commit, and push the file
 execSync('git add example.txt');
-execSync('git commit - m "Hey there"');
+execSync('git commit -m "Hey there"');
 execSync(`git push https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git ${GITHUB_REF}:${GITHUB_REF}`);
 
 fetch("https://selective-proud-club.glitch.me/")
