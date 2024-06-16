@@ -19,7 +19,7 @@ if (GITHUB_EVENT_NAME === 'push' && GITHUB_ACTOR === 'github-actions[bot]') {
 
 // Create example.txt
 const filePath = 'example.txt';
-const content = 'This is an example file created by GitHub Actions';
+const content = 'This is an example file created by GitHub Actions ahhhhhhh';
 fs.writeFileSync(filePath, content);
 
 // Configure Git
