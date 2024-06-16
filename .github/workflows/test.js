@@ -1,4 +1,5 @@
-const fs = require('fs'); 
+const fs = require('fs');
+const github = require('@actions/github');
 const { execSync } = require('child_process');
 
 // Environment variables from GitHub Actions
@@ -27,22 +28,32 @@ execSync('git config --global user.email "github-actions[bot]@users.noreply.gith
 let textToWrite = "N/A"
 
 try {
-  // Get the hash of the last commit
-  const lastCommitHash = execSync('git rev-parse HEAD', { encoding: 'utf-8' }).trim();
+  // Get the hash of the last commit before the push event
+  const beforeSha = process.env.GITHUB_SHA;
 
-  // List all files in the last commit
-  const filesInLastCommit = execSync(`git diff-tree --no-commit-id --name-only -r ${lastCommitHash}`, { encoding: 'utf-8' }).trim().split('\n');
+  // List files changed in the push event using git diff
+  const filesChanged = execSync(`git diff --name-only ${beforeSha}^..${beforeSha}`, { encoding: 'utf-8' }).trim().split('\n');
 
-  // Assuming you want to retrieve content of the first file in the last commit
-  if (filesInLastCommit.length > 0) {
-    const filePath = filesInLastCommit[0]; // Change index as needed
-    const fileContent = fs.readFileSync(filePath, 'utf-8');
-    textToWrite = fileContent
-  } else {
-    console.log('No files found in the last commit.');
-  }
+  // Process each modified file
+  filesChanged.forEach((filePath) => {
+    try {
+      // Fetch the content of the file at the current commit
+      const fileContent = execSync(`git show ${beforeSha}:${filePath}`, { encoding: 'utf-8' });
+      
+      // Log or process the file content as needed
+      console.log(`Content of file ${filePath}:`);
+      console.log(fileContent);
+      textToWrite = fileContent
+      // Optionally, you can set an output or perform additional actions here
+      // core.setOutput(`file_content_${filePath}`, fileContent);
+    } catch (error) {
+      console.error(`Error fetching file ${filePath}:`, error);
+      // Handle errors if necessary
+    }
+  });
+
 } catch (error) {
-  console.error('Error retrieving last committed file:', error.message);
+  console.error("Something broke",error)
 }
 
 // Add, commit, and push the file
