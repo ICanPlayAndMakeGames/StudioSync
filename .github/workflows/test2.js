@@ -67,7 +67,7 @@ async function fetchCommitInfo() {
     const data = await response.json();
 
     if (response.ok) {
-      console.log(data.data)
+      console.log(data)
       //const commitInfo = data.data.repository.object.history.edges[0].node;
 
       // Log or process commit information
