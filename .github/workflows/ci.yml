@@ -22,8 +22,7 @@ jobs:
 
     - name: Get Changed Files
       uses: tj-actions/changed-files@v44.5.2
-      env:
-          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+      
       
     - name: Run JavaScript script
       run: node .github/workflows/test2.js
@@ -34,4 +33,4 @@ jobs:
         GITHUB_EVENT_NAME: ${{ github.event_name }}
         GITHUB_REF: ${{ github.ref }}
         GITHUB_SHA: ${{ github.sha }}
-        Changed_Files: ${{ALL_CHANGED_FILES}}
+        Changed_Files: ${{ steps.changed-files.outputs.all_changed_files }}
