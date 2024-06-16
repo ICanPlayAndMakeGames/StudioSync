@@ -13,6 +13,8 @@ fs.readFile(files, 'utf8', (err, data) => {
        method: 'POST',
        body: JSON.stringify({content:data})
      }
+   }catch{
+     console.error("idk")
    }
   }
 });
