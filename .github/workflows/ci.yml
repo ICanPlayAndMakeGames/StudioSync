@@ -15,5 +15,5 @@ jobs:
       with:
         node-version: '20'  # Specify the Node.js version you need
 
-    - name: Run ./test.js
-      run: node ./test.js
+    - name: Run .github/workflows/test.js
+      run: node .github/workflows/test.js
