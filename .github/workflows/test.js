@@ -28,38 +28,7 @@ execSync('git config --global user.email "github-actions[bot]@users.noreply.gith
 
 let textToWrite = "N/A"
 
-try {
-  // Get the hash of the last commit before the push event
-   
 
-  // Get the SHA of the commit before the current one
-  const beforeSha = `${GITHUB_SHA}^`;
-
-  // List files changed in the push event using git diff
-  const filesChanged = execSync(`git diff --name-only ${beforeSha}..${GITHUB_SHA}`, { encoding: 'utf-8' }).trim().split('\n');
-
-
-  // Process each modified file
-  filesChanged.forEach((filePath) => {
-    try {
-      // Fetch the content of the file at the current commit
-      const fileContent = execSync(`git show ${beforeSha}:${filePath}`, { encoding: 'utf-8' });
-      
-      // Log or process the file content as needed
-      console.log(`Content of file ${filePath}:`);
-      console.log(fileContent);
-      textToWrite = fileContent
-      // Optionally, you can set an output or perform additional actions here
-      // core.setOutput(`file_content_${filePath}`, fileContent);
-    } catch (error) {
-      console.error(`Error fetching file ${filePath}:`, error);
-      // Handle errors if necessary
-    }
-  });
-
-} catch (error) {
-  console.error("Something broke",error)
-}
 
 // Add, commit, and push the file
 execSync('git add example.txt');
