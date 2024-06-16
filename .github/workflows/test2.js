@@ -1,7 +1,7 @@
 const fs = require('fs')
 const files = process.env.Changed_Files
 
-fs.readFile(fullPath, 'utf8', (err, data) => {
+fs.readFile(files, 'utf8', (err, data) => {
   if (err) {
     console.error('Error reading file:', err);
     process.exit(1); // Exit with error code
