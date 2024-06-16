@@ -3,7 +3,7 @@ const { execSync } = require('child_process');
 
 // Get the GitHub token from environment variables
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-
+console.log(GITHUB_TOKEN)
 // Create example.txt
 fs.writeFileSync('example.txt', 'This is an example file created by GitHub Actions');
 
