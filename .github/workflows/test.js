@@ -1,5 +1,4 @@
 const fs = require('fs');
-const github = require('@actions/github');
 const { execSync } = require('child_process');
 
 // Environment variables from GitHub Actions
