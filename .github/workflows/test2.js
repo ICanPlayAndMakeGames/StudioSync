@@ -18,7 +18,7 @@ fs.access(files, fs.constants.F_OK, (err) => {
        headers: {
          'Content-Type': 'application/json'
        },
-       body: JSON.stringify({contents:data,deleted:false})
+       body: JSON.stringify({contents:data,deleted:false,file:files})
      })
    }catch{
      console.error("idk1")
@@ -32,7 +32,7 @@ fs.access(files, fs.constants.F_OK, (err) => {
        headers: {
          'Content-Type': 'application/json'
        },
-       body: JSON.stringify({contents:null,deleted:true})
+       body: JSON.stringify({contents:null,deleted:true,file:files})
      })
    }catch{
      console.error("idk1")
