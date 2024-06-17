@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const files = process.env.Changed_Files
 
-fs.access(filePath, fs.constants.F_OK, (err) => { 
+fs.access(files, fs.constants.F_OK, (err) => { 
     if (!err) {
         console.log('File exists, running code...'); 
         fs.readFile(files, 'utf8', (err, data) => {
