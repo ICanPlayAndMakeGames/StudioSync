@@ -3,8 +3,7 @@ const path = require('path')
 const files = process.env.Changed_Files
 
 
-path.exists('foo.txt', function(exists) { 
-  if (exists) { 
+if (path.existsSync(files)){
     fs.readFile(files, 'utf8', (err, data) => {
   if (err) {
     console.error('Error reading file:', err);
@@ -37,10 +36,8 @@ path.exists('foo.txt', function(exists) {
    }catch{
      console.error("idk1")
    }
-};
+}
 
-
-});
 
 
 console.log(files)
