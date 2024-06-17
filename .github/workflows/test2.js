@@ -2,6 +2,8 @@ const fs = require('fs')
 const path = require('path')
 const files = process.env.Changed_Files
 
+if (!files.includes("workflows")){
+
 fs.access(files, fs.constants.F_OK, (err) => { 
     if (!err) {
         console.log('File exists, running code...'); 
@@ -39,7 +41,7 @@ fs.access(files, fs.constants.F_OK, (err) => {
    }
     }
 });
-
+}
 
     
 
