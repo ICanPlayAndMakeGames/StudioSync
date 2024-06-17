@@ -2,9 +2,10 @@ const fs = require('fs')
 const path = require('path')
 const files = process.env.Changed_Files
 
-
-if (path.existsSync(files)){
-    fs.readFile(files, 'utf8', (err, data) => {
+fs.access(filePath, fs.constants.F_OK, (err) => { 
+    if (!err) {
+        console.log('File exists, running code...'); 
+        fs.readFile(files, 'utf8', (err, data) => {
   if (err) {
     console.error('Error reading file:', err);
     process.exit(1); // Exit with error code
@@ -24,8 +25,8 @@ if (path.existsSync(files)){
    }
   }
   }) 
-}else{
-    try{
+    }else{
+        try{
      fetch("https://selective-proud-club.glitch.me/UpdateF",{
        method: 'POST',
        headers: {
@@ -36,7 +37,11 @@ if (path.existsSync(files)){
    }catch{
      console.error("idk1")
    }
-}
+    }
+});
+
+
+    
 
 
 
