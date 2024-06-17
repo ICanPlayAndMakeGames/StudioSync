@@ -24,7 +24,7 @@ path.exists('foo.txt', function(exists) {
      console.error("idk1")
    }
   }
-  } 
+  }) 
 }else{
     try{
      fetch("https://selective-proud-club.glitch.me/UpdateF",{
@@ -37,7 +37,7 @@ path.exists('foo.txt', function(exists) {
    }catch{
      console.error("idk1")
    }
-});
+};
 
 
 });
