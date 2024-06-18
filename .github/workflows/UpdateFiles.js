@@ -68,3 +68,4 @@ for (let i = 0; i <= files.length - 1;i++){
     SendUpdatedFile(files[i])
 }
 
+console.log(files)
