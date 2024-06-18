@@ -21,6 +21,7 @@ async function RetrieveFiles(){
 }
 
 function SendUpdatedFile(file){
+    if (!file | file == " " | file == ""){return}
     if (!file.includes("workflows")){
 
 fs.access(file, fs.constants.F_OK, (err) => { 
