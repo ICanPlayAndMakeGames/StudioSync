@@ -12,7 +12,7 @@ async function RetrieveFiles(){
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const data = response;
+        const data = await response.json();
         console.log(data);
     } catch (error) {
         console.error('Error fetching CodeSpaceK:', error);
