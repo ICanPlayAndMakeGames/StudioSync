@@ -12,7 +12,7 @@ async function RetrieveFiles(){
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const data = await response.json();
+        const data = response;
         console.log(data);
     } catch (error) {
         console.error('Error fetching CodeSpaceK:', error);
@@ -59,7 +59,7 @@ fs.access(file, fs.constants.F_OK, (err) => {
    }
     }
 });
-}else if(file.includes("update")){
+}else if(file.includes("update.now")){
   RetrieveFiles()
 }
 }
@@ -68,4 +68,3 @@ for (let i = 0; i <= files.length - 1;i++){
     SendUpdatedFile(files[i])
 }
 
-console.log(files)
