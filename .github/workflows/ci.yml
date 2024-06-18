@@ -28,7 +28,7 @@ jobs:
       id: find_deleted_files
       run: |          
             deleted_files=$(git diff --diff-filter=D --name-only HEAD~1 HEAD)
-            echo "DeletedFiles=$deleted_files" >> $GITHUB_ENV
+            echo "Deleted_Files=$deleted_files" >> $GITHUB_ENV
       
     - name: Run JavaScript script
       run: node .github/workflows/UpdateFiles.js
