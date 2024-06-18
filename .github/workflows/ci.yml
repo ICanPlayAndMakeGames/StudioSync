@@ -24,9 +24,7 @@ jobs:
       id: changed-files
       uses: tj-actions/changed-files@v44.5.2
       
-    - name: List all changed files
-      env:
-          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
+   
       
     - name: Run JavaScript script
       run: node .github/workflows/UpdateFiles.js
