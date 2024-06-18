@@ -2,6 +2,8 @@ const fs = require('fs')
 const path = require('path')
 const files = process.env.Changed_Files
 
+console.log(files)
+
 if (!files.includes("workflows")){
 
 fs.access(files, fs.constants.F_OK, (err) => { 
