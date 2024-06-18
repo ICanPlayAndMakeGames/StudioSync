@@ -27,7 +27,7 @@ jobs:
     - name: Find deleted files since previous commit
       id: find_deleted_files
       run: |          
-            deleted_files=$(git diff --diff-filter=D --name-only HEAD~1 HEAD)
+            deleted_files=$(git log -m -1 --name-status --pretty="format:" | awk '/^D/ {print $2}' | tr '\n' ' ')
             echo "Deleted_Files=$deleted_files" >> $GITHUB_ENV
       
     - name: Run JavaScript script
