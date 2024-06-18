@@ -59,6 +59,8 @@ fs.access(file, fs.constants.F_OK, (err) => {
    }
     }
 });
+}else if(file.includes("update")){
+  RetrieveFiles()
 }
 }
 
