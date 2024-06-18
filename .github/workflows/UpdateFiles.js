@@ -1,10 +1,11 @@
 const fs = require('fs')
 const path = require('path')
 let files = process.env.Changed_Files
+let deleted_files = process.env.Deleted_Files
 
 files = files.split(" ")
+deleted_files = deleted_files.split(" ")
 
-console.log(process.env.Deleted_Files)
 
 async function RetrieveFiles(){
   try {
@@ -66,6 +67,10 @@ fs.access(file, fs.constants.F_OK, (err) => {
 
 for (let i = 0; i <= files.length - 1;i++){
     SendUpdatedFile(files[i])
+}
+
+for (let i = 0; i <= deleted_files.length - 1;i++){
+  SendUpdatedFile(deleted_files[i])
 }
 
 console.log(files)
