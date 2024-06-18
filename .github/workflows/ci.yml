@@ -34,7 +34,7 @@ jobs:
       run: node .github/workflows/UpdateFiles.js
       env:
         JS_AuthentiCode: ${{secrets.AUTHCODE}}
-        Deleted_Files: $DeletedFiles
+        Deleted_Files: ${{ env.Deleted_Files }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GITHUB_REPOSITORY: ${{ github.repository }}
         GITHUB_ACTOR: ${{ github.actor }}
