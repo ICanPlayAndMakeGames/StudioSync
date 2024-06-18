@@ -4,7 +4,7 @@ let files = process.env.Changed_Files
 
 files = files.split(" ")
 
-for (let i = 0; i <= files.length;i++){
+for (let i = 0; i <= files.length - 1;i++){
     console.log(files[i])
 }
 
