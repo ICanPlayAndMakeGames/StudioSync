@@ -2,7 +2,9 @@ const fs = require('fs')
 const path = require('path')
 const files = process.env.Changed_Files
 
-console.log(files)
+for (let i = 0; i <= files.length;i++){
+    console.log(files[i])
+}
 
 if (!files.includes("workflows")){
 
