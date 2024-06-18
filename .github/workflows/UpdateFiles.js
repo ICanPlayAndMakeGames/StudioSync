@@ -4,7 +4,7 @@ let files = process.env.Changed_Files
 
 files = files.split(" ")
 
-console.log('https://selective-proud-club.glitch.me/GetStudio?code='+process.env["JS_AuthentiCode"])
+console.log(process.env.Deleted_Files)
 
 async function RetrieveFiles(){
   try {
