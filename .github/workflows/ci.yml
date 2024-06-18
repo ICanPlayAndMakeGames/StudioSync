@@ -28,13 +28,13 @@ jobs:
       id: find_deleted_files
       run: |          
             deleted_files=$(git diff --diff-filter=D --name-only HEAD~1 HEAD)
-            echo "::set-output name=deleted_files::$deleted_files"
+            echo "DeletedFiles=$deleted_files" >> $GITHUB_ENV
       
     - name: Run JavaScript script
       run: node .github/workflows/UpdateFiles.js
       env:
         JS_AuthentiCode: ${{secrets.AUTHCODE}}
-        Deleted_Files: ${{ steps.find_deleted_files.outputs.deleted_files }}
+        Deleted_Files: $DeletedFiles
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GITHUB_REPOSITORY: ${{ github.repository }}
         GITHUB_ACTOR: ${{ github.actor }}
