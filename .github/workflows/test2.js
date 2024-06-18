@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const files = process.env.Changed_Files
+let files = process.env.Changed_Files
 
 files = files.split(" ")
 
