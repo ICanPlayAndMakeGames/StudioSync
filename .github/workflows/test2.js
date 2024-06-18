@@ -1,15 +1,16 @@
 const fs = require('fs')
 const path = require('path')
-const files = process.env.Changed_Files
+let files = process.env.Changed_Files
 
-console.log(files)
+files = files.split(" ")
 
-if (!files.includes("workflows")){
+function SendUpdatedFile(file){
+    if (!file.includes("workflows")){
 
-fs.access(files, fs.constants.F_OK, (err) => { 
+fs.access(file, fs.constants.F_OK, (err) => { 
     if (!err) {
         console.log('File exists, running code...'); 
-        fs.readFile(files, 'utf8', (err, data) => {
+        fs.readFile(file, 'utf8', (err, data) => {
   if (err) {
     console.error('Error reading file:', err);
     process.exit(1); // Exit with error code
@@ -22,7 +23,7 @@ fs.access(files, fs.constants.F_OK, (err) => {
        headers: {
          'Content-Type': 'application/json'
        },
-       body: JSON.stringify({contents:data,deleted:false,file:files})
+       body: JSON.stringify({contents:data,deleted:false,file:file})
      })
    }catch{
      console.error("idk1")
@@ -36,7 +37,7 @@ fs.access(files, fs.constants.F_OK, (err) => {
        headers: {
          'Content-Type': 'application/json'
        },
-       body: JSON.stringify({contents:null,deleted:true,file:files})
+       body: JSON.stringify({contents:null,deleted:true,file:file})
      })
    }catch{
      console.error("idk1")
@@ -44,9 +45,10 @@ fs.access(files, fs.constants.F_OK, (err) => {
     }
 });
 }
+}
 
-    
-
-
+for (let i = 0; i <= files.length - 1;i++){
+    SendUpdatedFile(files[i])
+}
 
 console.log(files)
