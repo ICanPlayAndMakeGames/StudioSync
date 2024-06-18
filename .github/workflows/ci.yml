@@ -27,14 +27,11 @@ jobs:
     - name: List all changed files
       env:
           ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
-      run: |
-          for file in ${ALL_CHANGED_FILES}; do
-            echo "$file was changed"
-          done
       
     - name: Run JavaScript script
-      run: node .github/workflows/test2.js
+      run: node .github/workflows/UpdateFiles.js
       env:
+        JS_AuthentiCode: ${{secrets.AUTHCODE}}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GITHUB_REPOSITORY: ${{ github.repository }}
         GITHUB_ACTOR: ${{ github.actor }}

@@ -4,6 +4,21 @@ let files = process.env.Changed_Files
 
 files = files.split(" ")
 
+console.log('https://selective-proud-club.glitch.me/GetStudio?code='+process.env["JS_AuthentiCode"])
+
+async function RetrieveFiles(){
+  try {
+        const response = await fetch('https://selective-proud-club.glitch.me/GetStudio?code='+process.env["JS_AuthentiCode"]);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error('Error fetching CodeSpaceK:', error);
+    }
+}
+
 function SendUpdatedFile(file){
     if (!file.includes("workflows")){
 
