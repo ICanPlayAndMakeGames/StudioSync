@@ -43,11 +43,21 @@ jobs:
         GITHUB_REF: ${{ github.ref }}
         GITHUB_SHA: ${{ github.sha }}
         Changed_Files: ${{ steps.changed-files.outputs.all_changed_files }}
-        
-    - name: Commit and push changes
+
+    - name: Check for changes
+      id: check-changes
       run: |
         git config --global user.name "github-actions[bot]"
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        if [[ -n $(git status -s) ]]; then
+          echo "changes_detected = true" >> $GITHUB_ENV
+        else
+          echo "changes_detected = false" >> $GITHUB_ENV
+        fi
+
+    - name: Commit and push changes
+      if: ${{env.changes_detected}} == 'true'
+      run: |
         git add .
         git commit -m "Update files based on latest changes [skip ci]"
         git push
