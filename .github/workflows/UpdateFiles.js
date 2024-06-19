@@ -16,7 +16,13 @@ async function createFiles(data) {
   
   fs.access('.github/workflows/update.now', fs.constants.F_OK, (err) => { 
     if (!err) {
-        fs.rmdirSync('.github/workflows/update.now', { recursive: true });;
+      fs.unlink('.github/workflows/update.now', (err) => {
+        if (err) {
+          console.error('Error deleting file:', err);
+          return;
+        }
+        console.log('File deleted successfully');
+      });  
     }
   })
     
