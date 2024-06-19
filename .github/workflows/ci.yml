@@ -46,6 +46,6 @@ jobs:
 
     - name: Check if there are changes
       id: changes
-      run: echo git status --porcelain
+      run: echo $(git status --porcelain)
 
     
