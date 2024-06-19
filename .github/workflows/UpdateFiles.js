@@ -143,7 +143,9 @@ for (let i = 0; i <= files.length - 1;i++){
 }
 
 for (let i = 0; i <= deleted_files.length - 1;i++){
+  if (!deleted_files[i].includes("update.now")){
   SendUpdatedFile(deleted_files[i])
+  }
 }
 
 console.log(files)
