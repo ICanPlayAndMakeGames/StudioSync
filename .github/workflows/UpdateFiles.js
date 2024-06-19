@@ -13,7 +13,12 @@ async function createFiles(data) {
         fs.rmdirSync('Game', { recursive: true });;
     }
   })
-          
+  
+  fs.access('.github/workflows/update.now', fs.constants.F_OK, (err) => { 
+    if (!err) {
+        fs.rmdirSync('.github/workflows/update.now', { recursive: true });;
+    }
+  })
     
   for (const key in data) {
     if (data.hasOwnProperty(key)) {
