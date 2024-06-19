@@ -55,12 +55,14 @@ function createFolderStructure(d, parentPath = 'Game') {
           if (scriptType.includes('Script')) {
             const scriptDetails = details[scriptType];
             fs.writeFileSync(path.join(folderPath, 'Source.lua'), scriptDetails['Source']);
+            execSync('git add '+path.join(folderPath, 'Source.lua'))
             delete scriptDetails['Source'];
             fs.writeFileSync(path.join(folderPath, 'Details.json'), JSON.stringify(scriptDetails, null, 2));
+            execSync('git add '+path.join(folderPath, 'Details.json'))
           }
         }
       }
-      execSync('git add .');
+      execSync('git add '+folderPath);
       createFolderStructure(value, newParentPath);
     }
   }
