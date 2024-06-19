@@ -44,19 +44,12 @@ jobs:
         GITHUB_SHA: ${{ github.sha }}
         Changed_Files: ${{ steps.changed-files.outputs.all_changed_files }}
 
-    - name: Check for changes
-      id: check-changes
-      run: |
-        git config --global user.name "github-actions[bot]"
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        if [[ -n $(git status -s) ]]; then
-          echo "changes_detected = true" >> $GITHUB_ENV
-        else
-          echo "changes_detected = false" >> $GITHUB_ENV
-        fi
+    - name: Check if there are changes
+      id: changes
+      uses: UnicornGlobal/has-changes-action@v1.0.11
 
     - name: Commit and push changes
-      if: ${{env.changes_detected}} == 'true'
+      if: steps.changes.outputs.changed == 1
       run: |
         git add .
         git commit -m "Update files based on latest changes [skip ci]"
