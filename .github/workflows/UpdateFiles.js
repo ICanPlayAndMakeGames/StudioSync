@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const { execSync } = require('child_process');
 let files = process.env.Changed_Files
 let deleted_files = process.env.Deleted_Files
 
@@ -42,7 +43,7 @@ function createFolderStructure(d, parentPath = 'Game') {
       const folderPath = path.join(parentPath, folderName);
 
       fs.mkdirSync(folderPath, { recursive: true });
-
+      console.log("Created ",folderPath)
       if (value['Details']) {
         const details = value['Details'];
         if (Object.keys(details).length > 0) {
@@ -70,6 +71,21 @@ async function RetrieveFiles(){
         const data = await response.json();
         if (data){
           await createFiles(data)
+          try {
+            // Stage all changes in the current directory and its subdirectories
+            execSync('git add .');
+        
+            // Commit changes with a specific commit message
+            execSync('git commit -m "Files made [skip ci]"');
+        
+            // Push changes to the remote repository
+            execSync('git push');
+        
+            console.log('Changes committed and pushed successfully.');
+        } catch (error) {
+            console.error('Error during git operations:', error);
+            process.exit(1); // Exit with non-zero code to indicate failure
+        }
         }
     } catch (error) {
         console.error('Error fetching CodeSpaceK:', error);
