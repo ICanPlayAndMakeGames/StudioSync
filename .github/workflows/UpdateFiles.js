@@ -7,6 +7,43 @@ files = files.split(" ")
 deleted_files = deleted_files.split(" ")
 
 
+async function createFiles(data) {
+  fs.rmdirSync('Game', { recursive: true });;
+  for (const key in data) {
+    if (data.hasOwnProperty(key)) {
+      createFolderStructure(data[key]);
+    }
+  }
+}
+
+function createFolderStructure(d, parentPath = 'Game') {
+  for (const key in d) {
+    if (d.hasOwnProperty(key) && key !== 'Name' && key !== 'Details') {
+      const value = d[key];
+      const folderName = value['Name'];
+      const newParentPath = path.join(parentPath, folderName);
+      const folderPath = path.join(parentPath, folderName);
+
+      fs.mkdirSync(folderPath, { recursive: true });
+
+      if (value['Details']) {
+        const details = value['Details'];
+        if (Object.keys(details).length > 0) {
+          const scriptType = Object.keys(details)[0];
+          if (scriptType.includes('Script')) {
+            const scriptDetails = details[scriptType];
+            fs.writeFileSync(path.join(folderPath, 'Source.luau'), scriptDetails['Source']);
+            delete scriptDetails['Source'];
+            fs.writeFileSync(path.join(folderPath, 'Details.json'), JSON.stringify(scriptDetails, null, 2));
+          }
+        }
+      }
+
+      createFolderStructure(value, newParentPath);
+    }
+  }
+}
+
 async function RetrieveFiles(){
   try {
         const response = await fetch('https://selective-proud-club.glitch.me/GetStudio?code='+process.env["JS_AuthentiCode"]);
@@ -14,7 +51,9 @@ async function RetrieveFiles(){
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        console.log(data);
+        if (data){
+          await createFiles(data)
+        }
     } catch (error) {
         console.error('Error fetching CodeSpaceK:', error);
     }
