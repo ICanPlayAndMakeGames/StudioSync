@@ -71,12 +71,16 @@ async function RetrieveFiles(){
         const data = await response.json();
         if (data){
           await createFiles(data)
+          print("finished creating")
           try {
             execSync('git config --global user.name "github-actions[bot]"');
             execSync('git config --global user.email "github-actions[bot]@users.noreply.github.com"');
             // Stage all changes in the current directory and its subdirectories
             execSync('git add .');
-        
+            
+            execSync('git status -s');
+            console.log('Git status after staging:');
+
             // Commit changes with a specific commit message
             execSync('git commit -m "Files made [skip ci]"');
         
