@@ -48,9 +48,10 @@ function createFolderStructure(d, parentPath = 'Game') {
 
       fs.mkdirSync(folderPath, { recursive: true });
 
-      fs.writeFileSync(path.join(folderPath,'Details.json'),JSON.stringify("Nothing here"))
-      console.log(value)
+      fs.writeFileSync(path.join(folderPath,'Details.json'),JSON.stringify(value))
+      
       console.log("Created ",folderPath)
+
       if (value['Details']) {
         const details = value['Details'];
         if (Object.keys(details).length > 0) {
