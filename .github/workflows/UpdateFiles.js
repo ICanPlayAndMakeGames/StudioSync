@@ -7,6 +7,10 @@ let deleted_files = process.env.Deleted_Files
 files = files.split(" ")
 deleted_files = deleted_files.split(" ")
 
+execSync('git config --global user.name "github-actions[bot]"');
+            execSync('git config --global user.email "github-actions[bot]@users.noreply.github.com"');
+            // Stage all changes in the current directory and its subdirectories
+            
 
 async function createFiles(data) {
   fs.access('Game', fs.constants.F_OK, (err) => { 
@@ -56,7 +60,7 @@ function createFolderStructure(d, parentPath = 'Game') {
           }
         }
       }
-
+      execSync('git add .');
       createFolderStructure(value, newParentPath);
     }
   }
@@ -73,10 +77,7 @@ async function RetrieveFiles(){
           await createFiles(data)
           console.log("finished creating")
           try {
-            execSync('git config --global user.name "github-actions[bot]"');
-            execSync('git config --global user.email "github-actions[bot]@users.noreply.github.com"');
-            // Stage all changes in the current directory and its subdirectories
-            execSync('git add .');
+            
             
             execSync('git status -s');
             console.log('Git status after staging:');
