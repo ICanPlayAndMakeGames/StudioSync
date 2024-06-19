@@ -13,11 +13,7 @@ execSync('git config --global user.name "github-actions[bot]"');
             
 
 async function createFiles(data) {
-  fs.access('Game', fs.constants.F_OK, (err) => { 
-    if (!err) {
-        fs.rmdirSync('Game', { recursive: true });;
-    }
-  })
+  
   
   fs.access('.github/workflows/update.now', fs.constants.F_OK, (err) => { 
     if (!err) {
