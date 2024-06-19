@@ -44,11 +44,6 @@ jobs:
         GITHUB_SHA: ${{ github.sha }}
         Changed_Files: ${{ steps.changed-files.outputs.all_changed_files }}
 
-    - name: Stage all changed things
-      run: git add .
-
-    - name: Check if there are changes
-      id: changes
-      run: echo $(git status --porcelain)
+    
 
     

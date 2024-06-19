@@ -72,6 +72,8 @@ async function RetrieveFiles(){
         if (data){
           await createFiles(data)
           try {
+            execSync('git config --global user.name "github-actions[bot]"');
+            execSync('git config --global user.email "github-actions[bot]@users.noreply.github.com"');
             // Stage all changes in the current directory and its subdirectories
             execSync('git add .');
         
