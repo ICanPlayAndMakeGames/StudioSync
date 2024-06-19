@@ -32,7 +32,7 @@ function createFolderStructure(d, parentPath = 'Game') {
           const scriptType = Object.keys(details)[0];
           if (scriptType.includes('Script')) {
             const scriptDetails = details[scriptType];
-            fs.writeFileSync(path.join(folderPath, 'Source.luau'), scriptDetails['Source']);
+            fs.writeFileSync(path.join(folderPath, 'Source.lua'), scriptDetails['Source']);
             delete scriptDetails['Source'];
             fs.writeFileSync(path.join(folderPath, 'Details.json'), JSON.stringify(scriptDetails, null, 2));
           }
