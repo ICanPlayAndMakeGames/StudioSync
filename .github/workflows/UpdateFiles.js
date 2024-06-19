@@ -8,7 +8,13 @@ deleted_files = deleted_files.split(" ")
 
 
 async function createFiles(data) {
-  fs.rmdirSync('Game', { recursive: true });;
+  fs.access(file, fs.constants.F_OK, (err) => { 
+    if (!err) {
+        fs.rmdirSync('Game', { recursive: true });;
+    }
+  })
+          
+    
   for (const key in data) {
     if (data.hasOwnProperty(key)) {
       createFolderStructure(data[key]);
