@@ -47,18 +47,22 @@ function createFolderStructure(d, parentPath = 'Game') {
       const folderPath = path.join(parentPath, folderName);
 
       fs.mkdirSync(folderPath, { recursive: true });
+
+      fs.writeFileSync(path.join(folderPath,'Details.json'),JSON.stringify("Nothing here"))
+      console.log(value)
       console.log("Created ",folderPath)
       if (value['Details']) {
         const details = value['Details'];
         if (Object.keys(details).length > 0) {
           const scriptType = Object.keys(details)[0];
           if (scriptType.includes('Script')) {
+            console.log("Was a script")
             const scriptDetails = details[scriptType];
             fs.writeFileSync(path.join(folderPath, 'Source.lua'), scriptDetails['Source']);
-            execSync('git add '+path.join(folderPath, 'Source.lua'))
+            //execSync('git add '+path.join(folderPath, 'Source.lua'))
             delete scriptDetails['Source'];
             fs.writeFileSync(path.join(folderPath, 'Details.json'), JSON.stringify(scriptDetails, null, 2));
-            execSync('git add '+path.join(folderPath, 'Details.json'))
+            //execSync('git add '+path.join(folderPath, 'Details.json'))
           }
         }
       }
