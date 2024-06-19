@@ -8,7 +8,7 @@ deleted_files = deleted_files.split(" ")
 
 
 async function createFiles(data) {
-  fs.access(file, fs.constants.F_OK, (err) => { 
+  fs.access('Game', fs.constants.F_OK, (err) => { 
     if (!err) {
         fs.rmdirSync('Game', { recursive: true });;
     }
