@@ -71,7 +71,7 @@ async function RetrieveFiles(){
         const data = await response.json();
         if (data){
           await createFiles(data)
-          print("finished creating")
+          console.log("finished creating")
           try {
             execSync('git config --global user.name "github-actions[bot]"');
             execSync('git config --global user.email "github-actions[bot]@users.noreply.github.com"');
