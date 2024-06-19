@@ -62,7 +62,7 @@ function createFolderStructure(d, parentPath = 'Game') {
           }
         }
       }
-      execSync('git add '+folderPath);
+      //execSync('git add '+folderPath);
       createFolderStructure(value, newParentPath);
     }
   }
@@ -81,14 +81,14 @@ async function RetrieveFiles(){
           try {
             
             
-            execSync('git status -s');
-            console.log('Git status after staging:');
+           // execSync('git status -s');
+            //console.log('Git status after staging:');
 
             // Commit changes with a specific commit message
-            execSync('git commit -m "Files made [skip ci]"');
+           // execSync('git commit -m "Files made [skip ci]"');
         
             // Push changes to the remote repository
-            execSync('git push');
+            //execSync('git push');
         
             console.log('Changes committed and pushed successfully.');
         } catch (error) {
