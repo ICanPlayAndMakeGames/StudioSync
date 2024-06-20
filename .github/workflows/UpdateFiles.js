@@ -104,6 +104,7 @@ async function UpdateJson(file,contents){
               data['Details']['Script']['Source'] = contents
               fs.writeFileSync(file+"/Details.json",JSON.stringify(data, null, 2))
               console.log(fileName)
+              console.log({fileName:data})
               return {fileName:data}
               
             }catch{
@@ -116,7 +117,6 @@ async function UpdateJson(file,contents){
       })
     }
   })
-  return {}
 }
 
 async function sendUpdatedFile(file) {
