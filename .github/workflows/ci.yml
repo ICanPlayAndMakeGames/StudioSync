@@ -3,9 +3,8 @@ name: Detect Commit
 on: push
 
 permissions:
+  actions: write
   contents: write  # Grant write permissions to the GITHUB_TOKEN
-  issues: write
-  pull-requests: write
 
 jobs:
   conditional_execution:
