@@ -3,6 +3,7 @@ local this = "idk"
 
 function Hey()
 	print("Hey")
-end
+enddawda
+game
 gfadawsd
-sasasasdwawadadawdasad
+sasasasdwawadadawdasadwadawd
