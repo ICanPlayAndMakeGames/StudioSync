@@ -7,7 +7,6 @@ on: push
 jobs:
 
   permissions:
-    workflow: write
     contents: write
 
   conditional_execution:
