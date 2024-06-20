@@ -134,6 +134,7 @@ function SendUpdatedFile(file){
             process.exit(1); // Exit with error code
           } else {
             data = JSON.parse(data)
+            console.log(data)
             for (const key in data){
               if (file.includes(key)){
                 file.replace(key,data[key])
