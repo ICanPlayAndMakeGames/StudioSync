@@ -1,4 +1,9 @@
 {
-  "Enabled": true,
-  "RunContext": "Legacy"
+  "Name": "Script",
+  "Details": {
+    "Script": {
+      "Enabled": true,
+      "RunContext": "Legacy"
+    }
+  }
 }

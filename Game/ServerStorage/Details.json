@@ -1,1 +1,10 @@
-{"09cd1475-1685-b9f9-0683-515000007709":{"Name":"CustomServiceModules","Details":{"Folder":{}}},"Name":"ServerStorage","Details":{}}
+{
+  "09cd1475-1685-b9f9-0683-515000007709": {
+    "Name": "CustomServiceModules",
+    "Details": {
+      "Folder": {}
+    }
+  },
+  "Name": "ServerStorage",
+  "Details": {}
+}

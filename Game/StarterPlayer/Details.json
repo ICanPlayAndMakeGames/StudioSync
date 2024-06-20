@@ -1,1 +1,12 @@
-{"09cd1475-1685-b9f9-0683-515000000371":{"Name":"StarterPlayerScripts","Details":{}},"09cd1475-1685-b9f9-0683-515000000372":{"Name":"StarterCharacterScripts","Details":{}},"Name":"StarterPlayer","Details":{}}
+{
+  "09cd1475-1685-b9f9-0683-515000000371": {
+    "Name": "StarterPlayerScripts",
+    "Details": {}
+  },
+  "09cd1475-1685-b9f9-0683-515000000372": {
+    "Name": "StarterCharacterScripts",
+    "Details": {}
+  },
+  "Name": "StarterPlayer",
+  "Details": {}
+}
