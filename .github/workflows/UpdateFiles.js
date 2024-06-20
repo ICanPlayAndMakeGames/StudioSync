@@ -143,7 +143,7 @@ function SendUpdatedFile(file){
     }
     })
   }
-}
+
 
   console.log(file)
 
