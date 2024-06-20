@@ -84,7 +84,7 @@ async function retrieveFiles() {
     }
 }
 
-function UpdateJson(file,contents){
+async function UpdateJson(file,contents){
   file = file.replace("/Source.lua","")
   fs.access(file,fs.constants.F_OK,(err) =>{
     if (!err){
@@ -119,7 +119,7 @@ function UpdateJson(file,contents){
   return {}
 }
 
-function sendUpdatedFile(file) {
+async function sendUpdatedFile(file) {
     if (!file || file === " " || file === "") return;
 
     let NormalFile = file  
@@ -150,7 +150,7 @@ function sendUpdatedFile(file) {
         fs.access(file, fs.constants.F_OK, (err) => {
             if (!err) {
                 console.log('File exists, running code...');
-                fs.readFile(file, 'utf8', (err, data) => {
+                fs.readFile(file, 'utf8', async (err, data) => {
                     if (err) {
                         console.error('Error reading file:', err);
                         process.exit(1);
@@ -159,7 +159,7 @@ function sendUpdatedFile(file) {
                         try {
                             let sendData = {}
                             if (file.includes("Source.lua")){
-                              sendData = UpdateJson(NormalFile,JSON.stringify(data))
+                              sendData = await UpdateJson(NormalFile,JSON.stringify(data))
                               console.log(sendData)
                             }
 
