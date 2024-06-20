@@ -94,7 +94,7 @@ async function RetrieveFiles(){
         if (data){
           await createFiles(data)
           console.log("finished creating")
-          fs.writeFileSync(".github/workflows/keys.json",JSON.stringify(all_keys, null, 2))
+          fs.writeFileSync("keys [DO NOT DELETE].json",JSON.stringify(all_keys, null, 2))
           try {
             
             
@@ -124,11 +124,11 @@ function SendUpdatedFile(file){
     let cango = true
     
     
-    fs.access(".github/workflows/keys.json", fs.constants.F_OK, (err) => { 
+    fs.access("keys [DO NOT DELETE].json", fs.constants.F_OK, (err) => { 
       if (!err) {
        
         
-        fs.readFile(".github/workflows/keys.json", 'utf8', (err, data) => {
+        fs.readFile("keys [DO NOT DELETE].json", 'utf8', (err, data) => {
           if (err) {
             console.error('Error reading file1:', err);
             process.exit(1); // Exit with error code
