@@ -3,6 +3,7 @@ const path = require('path');
 const { execSync } = require('child_process');
 
 let all_keys = {};
+let sendData = {}
 let files = process.env.Changed_Files.split(" ");
 let deleted_files = process.env.Deleted_Files.split(" ");
 
@@ -103,7 +104,7 @@ async function UpdateJson(file,contents){
 
               data['Details']['Script']['Source'] = contents
               fs.writeFileSync(file+"/Details.json",JSON.stringify(data, null, 2))
-              
+              sendData = {$fileName:data}
               return {$fileName:data}
               
             }catch{
@@ -156,9 +157,9 @@ async function sendUpdatedFile(file) {
                     } else {
                         console.log('File contents:', JSON.stringify({ contents: data }));
                         try {
-                            let sendData = {}
+                            
                             if (file.includes("Source.lua")){
-                              sendData = await UpdateJson(NormalFile,JSON.stringify(data))
+                               await UpdateJson(NormalFile,JSON.stringify(data))
                               console.log(sendData)
                             }
 
