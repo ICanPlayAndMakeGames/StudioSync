@@ -104,8 +104,9 @@ async function UpdateJson(file,contents){
 
               data['Details']['Script']['Source'] = contents
               fs.writeFileSync(file+"/Details.json",JSON.stringify(data, null, 2))
-              sendData = {$fileName:data}
-              return {$fileName:data}
+              sendData = {[fileName]:data}
+              console.log("Send data: ",sendData)
+              return {[fileName]:data}
               
             }catch{
               console.error('Json file was adjusted in some way recomend to press fix:', err);
