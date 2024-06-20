@@ -86,11 +86,11 @@ async function retrieveFiles() {
 
 async function UpdateJson(file,contents){
   file = file.replace("/Source.lua","")
-  fs.access(file,fs.constants.F_OK,(err) =>{
+  return fs.access(file,fs.constants.F_OK,async (err) =>{
     if (!err){
-      fs.access(file+"/Details.json",fs.constants.F_OK,(err) =>{
+      return await fs.access(file+"/Details.json",fs.constants.F_OK, async(err) =>{
         if (!err){
-          fs.readFile(file+"/Details.json",'utf-8',(err,data) =>{
+          return await fs.readFile(file+"/Details.json",'utf-8',async (err,data) =>{
             if (err) {
               console.error('Error reading file1:', err);
               process.exit(1);
