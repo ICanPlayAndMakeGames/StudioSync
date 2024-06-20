@@ -1,9 +1,0 @@
-{
-  "Name": "Script",
-  "Details": {
-    "Script": {
-      "Enabled": true,
-      "RunContext": "Legacy"
-    }
-  }
-}

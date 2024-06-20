@@ -57,7 +57,7 @@ function createFolderStructure(d, parentPath = 'Game') {
             const scriptDetails = details[scriptType];
             fs.writeFileSync(path.join(folderPath, 'Source.lua'), scriptDetails['Source']);
             //execSync('git add '+path.join(folderPath, 'Source.lua'))
-            delete scriptDetails['Source'];
+            
             fs.writeFileSync(path.join(folderPath, 'Details.json'), JSON.stringify(value, null, 2));
             //execSync('git add '+path.join(folderPath, 'Details.json'))
           }
