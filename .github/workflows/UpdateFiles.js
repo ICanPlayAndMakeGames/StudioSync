@@ -160,7 +160,8 @@ async function sendUpdatedFile(file) {
                         try {
                             
                             if (file.includes("Source.lua")){
-                               await UpdateJson(NormalFile,JSON.stringify(data))
+                              UpdateJson(NormalFile,JSON.stringify(data))
+                              await new Promise(resolve => setTimeout(resolve, 750))
                               console.log(sendData)
                             }
 
