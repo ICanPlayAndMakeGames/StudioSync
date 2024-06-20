@@ -2,6 +2,8 @@ const fs = require('fs')
 const path = require('path')
 const { execSync } = require('child_process');
 
+
+
 let files = process.env.Changed_Files
 let deleted_files = process.env.Deleted_Files
 
@@ -29,12 +31,14 @@ async function createFiles(data) {
       });  
     }
   })
-    
+  let all_keys = {}
   for (const key in data) {
     if (data.hasOwnProperty(key)) {
+      
       createFolderStructure(data[key]);
     }
   }
+  fs.writeFileSync(".github/workflows/keys.json",JSON.stringify(value, null, 2))
 }
 
 function createFolderStructure(d, parentPath = 'Game') {
@@ -42,6 +46,8 @@ function createFolderStructure(d, parentPath = 'Game') {
     if (d.hasOwnProperty(key) && key !== 'Name' && key !== 'Details') {
       const value = d[key];
       let folderName = value['Name'];
+
+      all_keys[key] = folderName
 
       if (!CodeSpaces.includes(folderName)){
         folderName = key
@@ -116,27 +122,21 @@ function SendUpdatedFile(file){
   if (file.includes("Game") ){
     let cango = true
     
-    if (cango == true){
-    fs.access(file+"/Details.json", fs.constants.F_OK, (err) => { 
+    
+    fs.access(".github/workflows/keys.json", fs.constants.F_OK, (err) => { 
       if (!err) {
        
         
-        fs.readFile(file, 'utf8', (err, data) => {
+        fs.readFile(".github/workflows/keys.json", 'utf8', (err, data) => {
           if (err) {
             console.error('Error reading file1:', err);
             process.exit(1); // Exit with error code
           } else {
             data = JSON.parse(data)
-            if (data["Name"]){
-              let files = file.split("/")
-              files.pop()
-              files.append(data["Name"])
-              file = ""
-              for (let i; i <= files.length-1;i++){
-                file = file + files[i]
-                file = file + "/"
+            for (const key in data){
+              if (file.includes(key)){
+                file.replace(key,data[key])
               }
-              str = file.substring(0, file.length - 1)
             }
           }
       })
