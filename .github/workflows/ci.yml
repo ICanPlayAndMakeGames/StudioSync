@@ -4,7 +4,6 @@ on: push
 
 permissions:
   contents: write  # Grant write permissions to the GITHUB_TOKEN
-  contents: read
   issues: write
   pull-requests: write
 
