@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const { execSync } = require('child_process');
 
-
+let all_keys = {}
 
 let files = process.env.Changed_Files
 let deleted_files = process.env.Deleted_Files
@@ -18,7 +18,7 @@ execSync('git config --global user.name "github-actions[bot]"');
             
 
 async function createFiles(data) {
-  
+  all_keys = {}
   
   fs.access('.github/workflows/update.now', fs.constants.F_OK, (err) => { 
     if (!err) {
@@ -31,7 +31,7 @@ async function createFiles(data) {
       });  
     }
   })
-  let all_keys = {}
+  
   for (const key in data) {
     if (data.hasOwnProperty(key)) {
       
