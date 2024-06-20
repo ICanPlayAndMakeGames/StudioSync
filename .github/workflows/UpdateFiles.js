@@ -101,9 +101,11 @@ function UpdateJson(file,contents){
               let fileName = file.split("/")
               fileName = fileName[fileName.length - 1]
 
-              data['Details']['Source'] = contents
+              data['Details']['Script']['Source'] = contents
               fs.writeFileSync(file+"/Details.json",JSON.stringify(data, null, 2))
+              console.log(fileName)
               return {fileName:data}
+              
             }catch{
               console.error('Json file was adjusted in some way recomend to press fix:', err);
               process.exit(1);
@@ -158,7 +160,7 @@ function sendUpdatedFile(file) {
                             let sendData = {}
                             if (file.includes("Source.lua")){
                               sendData = UpdateJson(NormalFile,JSON.stringify(data))
-                             
+                              console.log(sendData)
                             }
 
                             fetch("https://selective-proud-club.glitch.me/UpdateF", {

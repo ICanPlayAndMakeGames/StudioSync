@@ -5,7 +5,6 @@
       "Enabled": true,
       "RunContext": "Legacy",
       "Source": "print(\"Yoooo yoooo\")\nlocal this = \"idk\"\n\nfunction Hey()\n\tprint(\"Hey\")\nend\n\nsasasas"
-    },
-    "Source": "\"print(\\\"Yoooo yoooo\\\")\\nlocal this = \\\"idk\\\"\\n\\nfunction Hey()\\n\\tprint(\\\"Hey\\\")\\nenddawda\\ngame\\ngfadawsd\\nsasasasdwawadadawdasadwadawd\""
+    }
   }
 }
