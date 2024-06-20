@@ -4,6 +4,8 @@ const { execSync } = require('child_process');
 let files = process.env.Changed_Files
 let deleted_files = process.env.Deleted_Files
 
+const CodeSpaces = ["ServerScriptService", "ServerStorage", "Workspace", "ReplicatedStorage", "ReplicatedFirst", "StarterGui", "StarterPack", "StarterPlayer", "TextChatService", "SoundService", "Teams"];
+
 files = files.split(" ")
 deleted_files = deleted_files.split(" ")
 
@@ -38,7 +40,12 @@ function createFolderStructure(d, parentPath = 'Game') {
   for (const key in d) {
     if (d.hasOwnProperty(key) && key !== 'Name' && key !== 'Details') {
       const value = d[key];
-      const folderName = key;
+      const folderName = value['Name'];
+
+      if (!CodeSpaces.includes(folderName)){
+        folderName = key
+      }
+
       const newParentPath = path.join(parentPath, folderName);
       const folderPath = path.join(parentPath, folderName);
 
