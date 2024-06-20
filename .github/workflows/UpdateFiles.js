@@ -1,6 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const { execSync } = require('child_process');
+
 let files = process.env.Changed_Files
 let deleted_files = process.env.Deleted_Files
 
@@ -111,6 +112,47 @@ async function RetrieveFiles(){
 }
 
 function SendUpdatedFile(file){
+
+  if (file.includes("Game") ){
+    let cango = true
+    for (let i; i<= CodeSpaces.length - 1;i++){
+      if (file.includes(CodeSpaces[i])){
+        cango = false
+        break
+
+      }
+    }
+    if (cango == true){
+    fs.access(file+"/Details.json", fs.constants.F_OK, (err) => { 
+      if (!err) {
+       
+        
+        fs.readFile(file, 'utf8', (err, data) => {
+          if (err) {
+            console.error('Error reading file1:', err);
+            process.exit(1); // Exit with error code
+          } else {
+            data = JSON.parse(data)
+            if (data["Name"]){
+              let files = file.split("/")
+              files.pop()
+              files.append(data["Name"])
+              file = ""
+              for (let i; i <= files.length-1;i++){
+                file = file + files[i]
+                file = file + "/"
+              }
+              str = file.substring(0, file.length - 1)
+            }
+          }
+      })
+    }
+    })
+  }
+}
+
+  console.log(file)
+
     if (!file | file == " " | file == ""){return}
     if (!file.includes("workflows")){
 
@@ -139,6 +181,7 @@ fs.access(file, fs.constants.F_OK, (err) => {
   }) 
     }else{
         try{
+          
      fetch("https://selective-proud-club.glitch.me/UpdateF",{
        method: 'POST',
        headers: {
