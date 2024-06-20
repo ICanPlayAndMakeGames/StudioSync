@@ -3,7 +3,7 @@ name: Detect Commit
 on: push
 
 permissions:
-  actions: write
+  workflows: write
   contents: write  # Grant write permissions to the GITHUB_TOKEN
 
 jobs:
