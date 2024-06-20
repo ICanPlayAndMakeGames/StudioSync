@@ -38,7 +38,7 @@ async function createFiles(data) {
       createFolderStructure(data[key]);
     }
   }
-  fs.writeFileSync(".github/workflows/keys.json",JSON.stringify(all_keys, null, 2))
+  
 }
 
 function createFolderStructure(d, parentPath = 'Game') {
@@ -94,6 +94,7 @@ async function RetrieveFiles(){
         if (data){
           await createFiles(data)
           console.log("finished creating")
+          fs.writeFileSync(".github/workflows/keys.json",JSON.stringify(all_keys, null, 2))
           try {
             
             
