@@ -137,7 +137,7 @@ function SendUpdatedFile(file){
             console.log(data)
             for (const key in data){
               if (file.includes(key)){
-                file.replace(key,data[key])
+                file = file.replace(key,data[key])
               }
             }
           }
