@@ -72,7 +72,7 @@ function createFolderStructure(d, parentPath = 'Game') {
 async function RetrieveFiles(){
   try { 
         console.log(process.env['api_key'])
-        const response = await fetch('https://selective-proud-club.glitch.me/GetStudio?uniId='+process.env["uni_id"]+'&placeId='+process.env["place_id"]+'&api_key='+process.env['api_key']);
+        const response = await fetch('https://selective-proud-club.glitch.me/GetStudio?uniId='+process.env["uni_id"]+'&placeId='+process.env["place_id"]+'&api_key='+encodeURIComponent(process.env['api_key']));
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
