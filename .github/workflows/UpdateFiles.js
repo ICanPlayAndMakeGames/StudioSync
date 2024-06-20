@@ -115,13 +115,7 @@ function SendUpdatedFile(file){
 
   if (file.includes("Game") ){
     let cango = true
-    for (let i; i<= CodeSpaces.length - 1;i++){
-      if (file.includes(CodeSpaces[i])){
-        cango = false
-        break
-
-      }
-    }
+    
     if (cango == true){
     fs.access(file+"/Details.json", fs.constants.F_OK, (err) => { 
       if (!err) {
