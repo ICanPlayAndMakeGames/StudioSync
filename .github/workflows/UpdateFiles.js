@@ -13,7 +13,7 @@ execSync('git config --global user.email "github-actions[bot]@users.noreply.gith
 
 async function createFiles(data) {
     all_keys = {};
-  
+
     fs.access('.github/workflows/update.now', fs.constants.F_OK, (err) => { 
         if (!err) {
             fs.unlink('.github/workflows/update.now', (err) => {
@@ -84,8 +84,43 @@ async function retrieveFiles() {
     }
 }
 
+function UpdateJson(file,contents){
+  file = file.replace("/Source.lua","")
+  fs.access(file,fs.constants.F_OK,(err) =>{
+    if (!err){
+      fs.access(file+"/Details.json",fs.constants.F_OK,(err) =>{
+        if (!err){
+          fs.readFile(file+"/Details.json",'utf-8',(err,data) =>{
+            if (err) {
+              console.error('Error reading file1:', err);
+              process.exit(1);
+          } else {
+            data = JSON.parse(data)
+            try{
+
+              let fileName = file.split("/")
+              fileName = fileName[fileName.length - 1]
+
+              data['Details']['Source'] = contents
+              fs.writeFileSync(file+"/Details.json",JSON.stringify(data, null, 2))
+              return {fileName:data}
+            }catch{
+              console.error('Json file was adjusted in some way recomend to press fix:', err);
+              process.exit(1);
+            }
+          }
+          })
+        }
+      })
+    }
+  })
+  return {}
+}
+
 function sendUpdatedFile(file) {
     if (!file || file === " " || file === "") return;
+
+    let NormalFile = file  
 
     if (file.includes("Game")) {
         fs.access("keys [DO NOT DELETE].json", fs.constants.F_OK, (err) => {
@@ -120,12 +155,18 @@ function sendUpdatedFile(file) {
                     } else {
                         console.log('File contents:', JSON.stringify({ contents: data }));
                         try {
+                            let sendData = {}
+                            if (file.includes("Source.lua")){
+                              sendData = UpdateJson(NormalFile,JSON.stringify(data))
+                             
+                            }
+
                             fetch("https://selective-proud-club.glitch.me/UpdateF", {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json'
                                 },
-                                body: JSON.stringify({ contents: data, deleted: false, file: file })
+                                body: JSON.stringify({ contents: data, deleted: false, file: file, Data: JSON.stringify(sendData)})
                             });
                         } catch (error) {
                             console.error("Error:", error);
