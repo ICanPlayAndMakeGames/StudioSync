@@ -42,7 +42,7 @@ function createFolderStructure(d, parentPath = 'Game') {
       const newParentPath = path.join(parentPath, folderName);
       const folderPath = path.join(parentPath, folderName);
 
-      fs.mkdirSync(folderName, { recursive: true });
+      fs.mkdirSync(folderPath, { recursive: true });
 
       fs.writeFileSync(path.join(folderPath,'Details.json'),JSON.stringify(value, null, 2))
       
