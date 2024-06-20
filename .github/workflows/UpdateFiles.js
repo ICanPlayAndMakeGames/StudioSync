@@ -40,7 +40,7 @@ function createFolderStructure(d, parentPath = 'Game') {
   for (const key in d) {
     if (d.hasOwnProperty(key) && key !== 'Name' && key !== 'Details') {
       const value = d[key];
-      const folderName = value['Name'];
+      let folderName = value['Name'];
 
       if (!CodeSpaces.includes(folderName)){
         folderName = key
