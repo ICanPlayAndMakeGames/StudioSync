@@ -3,7 +3,7 @@
     "Script": {
       "Enabled": true,
       "RunContext": "Legacy",
-      "Source": "\"print(\\\"Yoooo yoooo\\\")\\nlocal this = \\\"idk\\\"\\n\\nfunction Hey()\\n\\tprint(\\\"Hey\\\")\\nend\\n\\nlocal yay = \\\"sausages smell\\\"\\nprint(yay)\\nprint(\\\"this was made on mobile yay\\\") \\nprint(\\\"nvm11\\\")\\nprint(\\\"oof\\\")\\n\""
+      "Source": "print(\"Yoooo yoooo\")\nlocal this = \"idk\"\n\nfunction Hey()\n\tprint(\"Hey\")\nend\n\nlocal yay = \"sausages smell\"\nprint(yay)\nprint(\"this was made on mobile yay\") \nprint(\"nvm11\")\nprint(\"oof\")\nprint(\"hello\")\n"
     }
   }
 }
