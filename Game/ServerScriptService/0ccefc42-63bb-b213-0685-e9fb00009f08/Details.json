@@ -3,7 +3,7 @@
     "Script": {
       "Enabled": true,
       "RunContext": "Legacy",
-      "Source": "\"print(\\\"Yoooo yoooo\\\")\\nlocal this = \\\"idk\\\"\\n\\nfunction Hey()\\n\\tprint(\\\"Hey\\\")\\nend\\n\\nlocal 1\\n\""
+      "Source": "\"print(\\\"Yoooo yoooo\\\")\\nlocal this = \\\"idk\\\"\\n\\nfunction Hey()\\n\\tprint(\\\"Hey\\\")\\nend\\n\\nlocal yay\\n\""
     }
   }
 }
