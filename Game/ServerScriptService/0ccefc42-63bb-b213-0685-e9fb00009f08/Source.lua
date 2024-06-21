@@ -8,4 +8,4 @@ end
 local yay = "sausages smell"
 print(yay)
 print("this was made on mobile yay") 
-print("nvm")
+print("nvm1")
