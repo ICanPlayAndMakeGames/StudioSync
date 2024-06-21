@@ -167,7 +167,7 @@ async function sendUpdatedFile(file) {
                               console.log(sendData,sendName)
                             }
 
-                            fetch("https://selective-proud-club.glitch.me/UpdateF", {
+                            fetch(`https://selective-proud-club.glitch.me/UpdateF?uniId=${process.env["uni_id"]}&placeId=${process.env["place_id"]}&api_key=${encodeURIComponent(process.env["api_key"])}`, {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json'
