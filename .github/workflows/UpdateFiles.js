@@ -4,6 +4,7 @@ const { execSync } = require('child_process');
 
 let all_keys = {};
 let sendData = {}
+let sendName = ""
 let files = process.env.Changed_Files.split(" ");
 let deleted_files = process.env.Deleted_Files.split(" ");
 
@@ -104,9 +105,10 @@ async function UpdateJson(file,contents){
 
               data['Details']['Script']['Source'] = contents
               fs.writeFileSync(file+"/Details.json",JSON.stringify(data, null, 2))
-              sendData = {[fileName]:data}
+              sendData = {"engineInstance":data}
+              sendName = fileName
               console.log("Send data: ",sendData)
-              return {[fileName]:data}
+              return {"engineInstance":data}
               
             }catch{
               console.error('Json file was adjusted in some way recomend to press fix:', err);
@@ -162,7 +164,7 @@ async function sendUpdatedFile(file) {
                             if (file.includes("Source.lua")){
                               UpdateJson(NormalFile,JSON.stringify(data))
                               await new Promise(resolve => setTimeout(resolve, 750))
-                              console.log(sendData)
+                              console.log(sendData,sendName)
                             }
 
                             fetch("https://selective-proud-club.glitch.me/UpdateF", {
@@ -170,7 +172,7 @@ async function sendUpdatedFile(file) {
                                 headers: {
                                     'Content-Type': 'application/json'
                                 },
-                                body: JSON.stringify({ contents: data, deleted: false, file: file, Data: sendData})
+                                body: JSON.stringify({ contents: data, deleted: false, file: file, Data: sendData,Name: sendName})
                             });
                         } catch (error) {
                             console.error("Error:", error);
