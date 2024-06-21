@@ -5,7 +5,3 @@ function Hey()
 	print("Hey")
 end
 
-hey hey
-
-adjkalad
-
