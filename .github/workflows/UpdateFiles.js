@@ -102,10 +102,12 @@ async function UpdateJson(file,contents){
 
               let fileName = file.split("/")
               fileName = fileName[fileName.length - 1]
-              delete data['Name']  
+               
               data['Details']['Script']['Source'] = contents
               fs.writeFileSync(file+"/Details.json",JSON.stringify(data, null, 2))
               sendData = {"engineInstance":data}
+              delete data['Name'] 
+              delete data['Name']['Details']['RunContext']
               sendName = fileName
               console.log("Send data: ",sendData)
               return {"engineInstance":data}
