@@ -5,4 +5,4 @@ function Hey()
 	print("Hey")
 end
 
-local 1
+local yay
