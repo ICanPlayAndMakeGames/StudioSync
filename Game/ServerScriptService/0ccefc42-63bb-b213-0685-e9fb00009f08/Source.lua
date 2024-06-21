@@ -7,4 +7,4 @@ end
 
 local yay = "sausages smell"
 print(yay)
-print("this was made on mobile") 
+print("this was made on mobile yay") 
