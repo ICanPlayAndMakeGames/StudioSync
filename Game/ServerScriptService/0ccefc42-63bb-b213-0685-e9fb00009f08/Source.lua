@@ -5,4 +5,4 @@ function Hey()
 	print("Hey")
 end
 
-local yay
+local yay = "sausages smell"
