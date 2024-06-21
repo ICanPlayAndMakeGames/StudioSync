@@ -6,3 +6,4 @@ function Hey()
 end
 
 local yay = "sausages smell"
+print(yay)
