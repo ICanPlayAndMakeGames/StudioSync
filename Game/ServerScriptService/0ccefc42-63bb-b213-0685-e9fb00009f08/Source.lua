@@ -9,3 +9,4 @@ local yay = "sausages smell"
 print(yay)
 print("this was made on mobile yay") 
 print("nvm11")
+print("oof")
