@@ -102,8 +102,15 @@ async function UpdateJson(file,contents){
 
               let fileName = file.split("/")
               fileName = fileName[fileName.length - 1]
-               
+              //contents = text.trim();
+              //if (contents.startsWith('"')) {
+                  //contents = text.slice(1);
+              //}
+             // if (contents.endsWith('"')) {
+                  //contents = text.slice(0, -1);
+              //}
               data['Details']['Script']['Source'] = contents
+              
               fs.writeFileSync(file+"/Details.json",JSON.stringify(data, null, 2))
               delete data['Name'] 
               delete data['Details']['Script']['RunContext']
@@ -166,7 +173,7 @@ async function sendUpdatedFile(file) {
                         try {
                             
                             if (file.includes("Source.lua")){
-                              UpdateJson(NormalFile,JSON.stringify(data))
+                              UpdateJson(NormalFile,data)
                               await new Promise(resolve => setTimeout(resolve, 750))
                               console.log(sendData,sendName)
                             }
