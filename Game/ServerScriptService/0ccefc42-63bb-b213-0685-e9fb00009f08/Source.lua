@@ -6,4 +6,4 @@ function Hey()
 end
 
 local yay = "sausages smell"
-print(yay1)
+print(yay)
