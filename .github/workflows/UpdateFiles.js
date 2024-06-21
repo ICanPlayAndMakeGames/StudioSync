@@ -106,7 +106,7 @@ async function UpdateJson(file,contents){
               data['Details']['Script']['Source'] = contents
               fs.writeFileSync(file+"/Details.json",JSON.stringify(data, null, 2))
               delete data['Name'] 
-              delete data['Details']['RunContext']
+              delete data['Details']['Script']['RunContext']
               sendData = {"engineInstance":data}
               
               sendName = fileName
