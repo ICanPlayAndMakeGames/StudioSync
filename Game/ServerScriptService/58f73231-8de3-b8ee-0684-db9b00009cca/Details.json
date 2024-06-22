@@ -4,7 +4,7 @@
     "Script": {
       "Enabled": true,
       "RunContext": "Legacy",
-      "Source": "print(\"Yoooo yoooo\")\nlocal this = \"idk\"\n\nfunction Hey()\n\tprint(\"Hey\")\nend\n\nprint(\"yo what up people\")"
+      "Source": "print(\"Yoooo yoooo\")\nlocal this = \"idk\"\n\nfunction Hey()\n\tprint(\"Hey\")\nend\nprint(\"yo yo how you all doing\")\nprint(\"yo what up people\")\nprint(\"ay ay ay\")\nprint(\"ay ay 2222aa2aa2\")"
     }
   }
 }
