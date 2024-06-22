@@ -84,7 +84,7 @@ async function retrieveFiles() {
         const response = await GetStudio.main(process.env["uni_id"],process.env["place_id"],process.env["api_key"]);
         
 
-        const data = await response.json();
+        const data = response;
         if (data) {
             await createFiles(data);
             console.log("Finished creating");
