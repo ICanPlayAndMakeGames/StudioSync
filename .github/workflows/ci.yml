@@ -17,16 +17,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+     
     - uses: actions/checkout@v4
     
       with:
         fetch-depth: 2
 
-      uses: ${{ github.workspace }}
+    uses: ${{ github.repository }}
     
     - name: Set up Node.js
-    - uses: actions/setup-node@v4
+      uses: actions/setup-node@v4
       with:
         node-version: '20'
 
@@ -34,7 +34,7 @@ jobs:
 
     - name: Get Changed Files
       id: changed-files
-    - uses: tj-actions/changed-files@v44.5.2
+      uses: tj-actions/changed-files@v44.5.2
       
     - name: Find deleted files since previous commit
       id: find_deleted_files
