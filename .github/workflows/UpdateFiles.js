@@ -152,7 +152,7 @@ async function sendUpdatedFile(file) {
             console.log(fileExists)
             if (fileExists) {
                 console.log('File exists, running code...');
-                const data = await fs.promises.readFile(file, 'utf8');
+                const data = await fs.promises.readFile(NormalFile, 'utf8');
                 console.log('File contents:', JSON.stringify({ contents: data }));
 
                 if (file.includes("Source.lua")) {
