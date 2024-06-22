@@ -83,9 +83,6 @@ async function retrieveFiles() {
         console.log(process.env['api_key']);
         const response = await GetStudio.main(process.env["uni_id"],process.env["place_id"],process.env["api_key"]);
         
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
 
         const data = await response.json();
         if (data) {
