@@ -90,7 +90,8 @@ async function retrieveFiles() {
 async function UpdateJsonAndSend(file, contents) {
     file = file.replace("/Source.lua", "");
     try {
-        await fs.promises.access(file);
+        let doesExist = await fs.promises.access(file,fs.constants.F_OK);
+        if (doesExist){
         const data = await fs.promises.readFile(path.join(file, 'Details.json'), 'utf-8');
         let jsonData = JSON.parse(data);
         let fileName = path.basename(file);
@@ -105,7 +106,7 @@ async function UpdateJsonAndSend(file, contents) {
         jsonData = { "engineInstance": jsonData };
         console.log("Send data: ", sendData);
         await SaveStudio.SendData(process.env["uni_id"],process.env["place_id"],process.env["api_key"],jsonData,fileName)
-        
+        }
     } catch (err) {
         console.error('Error updating JSON file:', err);
         throw err;
@@ -136,7 +137,7 @@ async function sendUpdatedFile(file) {
     if (!file.includes("workflows")) {
         try {
             console.log(NormalFile)
-            const fileExists = await fs.promises.access(file);
+            const fileExists = await fs.promises.access(file,fs.constants.F_OK);
             console.log(fileExists)
             if (fileExists) {
                 console.log('File exists, running code...');
