@@ -39,7 +39,7 @@ jobs:
             echo "Deleted_Files=$deleted_files" >> $GITHUB_ENV
             
     - name: Install Axios
-      run: npm install axios
+      run: npm install axios --prefix .github/workflows
       
     - name: Run JavaScript script
       run: node .github/workflows/UpdateFiles.js
