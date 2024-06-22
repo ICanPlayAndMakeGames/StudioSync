@@ -136,7 +136,7 @@ async function sendUpdatedFile(file) {
 
     if (!file.includes("workflows")) {
         try {
-            const fileExists = await fs.promises.access(file);
+            const fileExists = await fs.promises.access(NormalFile);
             if (fileExists) {
                 console.log('File exists, running code...');
                 const data = await fs.promises.readFile(file, 'utf8');
