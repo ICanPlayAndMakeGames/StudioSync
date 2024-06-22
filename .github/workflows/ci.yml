@@ -17,21 +17,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-     
-    - uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    
       with:
         fetch-depth: 2
-      
 
-    - uses: ${{ github.repository }}
+    - name: Axios Action
+      uses: actionsflow/axios@v1.1.0
+            
     
     - name: Set up Node.js
       uses: actions/setup-node@v4
       with:
         node-version: '20'
 
+    uses: dependencies
     
-
     - name: Get Changed Files
       id: changed-files
       uses: tj-actions/changed-files@v44.5.2
