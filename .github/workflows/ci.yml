@@ -24,7 +24,7 @@ jobs:
         fetch-depth: 2
 
     - name: Axios Action
-      uses: actionsflow/axios@v1.1.0
+      uses: dependencies
             
     
     - name: Set up Node.js
