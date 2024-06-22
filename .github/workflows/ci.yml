@@ -21,8 +21,7 @@ jobs:
       with:
         fetch-depth: 2
     
-    - name: Axios
-      uses: ${{ steps.checkout.outputs.github_workspace }}
+      
 
     - name: Set up Node.js
       uses: actions/setup-node@v4
@@ -41,7 +40,8 @@ jobs:
             deleted_files=$(git log -m -1 --name-status --pretty="format:" | awk '/^D/ {print $2}' | tr '\n' ' ')
             echo "Deleted_Files=$deleted_files" >> $GITHUB_ENV
             
-      
+    - name: Install
+      run: npm install
 
     - name: Run JavaScript script
       run: node .github/workflows/UpdateFiles.js
