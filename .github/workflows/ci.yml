@@ -6,12 +6,7 @@ permissions: write-all  # Grant write permissions to the GITHUB_TOKEN
 
 jobs:
 
-  call_this:
-    runs-on: ubuntu-latest
-    uses: actions/checkout@v4
-    
-      with:
-        fetch-depth: 2
+  
 
   conditional_execution:
 
