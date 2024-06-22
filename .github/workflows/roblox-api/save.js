@@ -37,6 +37,7 @@ async function pollForResults(operationPath,api_key) {
 }
 
 async function SendData(uni_id,place_id,api_key,data,name){
+  console.log("this was fired")
   let updateInstanceUrl = `https://apis.roblox.com/cloud/v2/universes/${uni_id}/places/${place_id}/instances/${name}`
   
   const headers = {
@@ -48,7 +49,7 @@ axios.patch(updateInstanceUrl, data, { headers })
     .then(async response =>  {
         try{
           const result = await pollForResults(response.data.path,api_key)
-          console.log(result)
+          console.log("results: " + result)
         }catch{
           console.error("Something went wrong")
         }
