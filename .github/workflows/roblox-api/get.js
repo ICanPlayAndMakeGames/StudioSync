@@ -43,7 +43,7 @@ async function getChildrenMain(instanceId,uni_id,place_id,api_key) {
     }
 
     const operationPath = response.path;
-    const result = await api.pollForResults(operationPath,uni_id,place_id,api_key);
+    const result = await api.pollForResults(operationPath,api_key);
 
     try {
         return result.response.instances;
