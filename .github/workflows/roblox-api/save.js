@@ -1,4 +1,4 @@
-const axios = require('dependencies/node_modules/axios/lib/axios')
+const axios = require('dependencies/node_modules/axios/index.js')
 
 const getOperationUrl = "https://apis.roblox.com/cloud/v2/:operationPath";
 
