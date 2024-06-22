@@ -6,7 +6,6 @@ const SaveStudio = require('./roblox-api/save');
 
 let all_keys = {};
 let sendData = {};
-let sendName = "";
 let files = process.env.Changed_Files.split(" ");
 let deleted_files = process.env.Deleted_Files.split(" ");
 
@@ -136,6 +135,7 @@ async function sendUpdatedFile(file) {
 
     if (!file.includes("workflows")) {
         try {
+            console.log(NormalFile)
             const fileExists = await fs.promises.access(NormalFile);
             if (fileExists) {
                 console.log('File exists, running code...');
@@ -143,7 +143,7 @@ async function sendUpdatedFile(file) {
                 console.log('File contents:', JSON.stringify({ contents: data }));
 
                 if (file.includes("Source.lua")) {
-                    await UpdateJsonAndSend(NormalFile, data);
+                    UpdateJsonAndSend(NormalFile, data);
                     
                 }
 
