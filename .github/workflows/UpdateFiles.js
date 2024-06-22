@@ -18,13 +18,27 @@ const CodeSpaces = [
 execSync('git config --global user.name "github-actions[bot]"');
 execSync('git config --global user.email "github-actions[bot]@users.noreply.github.com"');
 
+async function checkFileExists(filePath) {
+    return fs.access(filePath)
+      .then(() => true)  // File exists and accessible
+      .catch(err => {
+        if (err.code === 'ENOENT') {
+          return false;   // File does not exist
+        } else {
+          throw err;      // Other error occurred, rethrow
+        }
+      });
+  }
+
 async function createFiles(data) {
     all_keys = {};
 
     try {
-        await fs.promises.access('.github/workflows/update.now', fs.constants.F_OK);
+        if (checkFileExists('.github/workflows/update.now')){
+        
         await fs.promises.unlink('.github/workflows/update.now');
-        console.log('File deleted successfully');
+        console.log('File deleted successfully')
+        }
     } catch (err) {
         console.error('Error deleting file:', err);
     }
@@ -90,7 +104,7 @@ async function retrieveFiles() {
 async function UpdateJsonAndSend(file, contents) {
     file = file.replace("/Source.lua", "");
     try {
-        let doesExist = await fs.promises.access(file,fs.constants.F_OK);
+        let doesExist = checkFileExists(file)
         if (doesExist){
         const data = await fs.promises.readFile(path.join(file, 'Details.json'), 'utf-8');
         let jsonData = JSON.parse(data);
@@ -137,7 +151,7 @@ async function sendUpdatedFile(file) {
     if (!file.includes("workflows")) {
         try {
             console.log(NormalFile)
-            const fileExists = await fs.promises.access(file,fs.constants.F_OK);
+            const fileExists = checkFileExists(NormalFile);
             console.log(fileExists)
             if (fileExists) {
                 console.log('File exists, running code...');
