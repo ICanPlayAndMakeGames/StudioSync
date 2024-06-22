@@ -157,6 +157,10 @@ async function start(uni_id,place_id,api_key) {
 
 async function main(uni_id,place_id,api_key) {
     
+    if (api_key){
+        console.log("IS api key")
+    }
+
     return await start(uni_id,place_id,api_key);
   
 }
