@@ -6,6 +6,13 @@ permissions: write-all  # Grant write permissions to the GITHUB_TOKEN
 
 jobs:
 
+  call_this:
+    runs-on: ubuntu-latest
+    uses: actions/checkout@v4
+    
+      with:
+        fetch-depth: 2
+
   conditional_execution:
 
     
@@ -14,12 +21,7 @@ jobs:
     if: "!contains(github.event.head_commit.message, 'Automated Change')"
     runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
     
-      with:
-        fetch-depth: 2
 
     steps:
 
