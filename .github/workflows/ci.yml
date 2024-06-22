@@ -38,12 +38,7 @@ jobs:
             deleted_files=$(git log -m -1 --name-status --pretty="format:" | awk '/^D/ {print $2}' | tr '\n' ' ')
             echo "Deleted_Files=$deleted_files" >> $GITHUB_ENV
             
-    - name: Install Axios
-      run: npm install axios --prefix dependencies
-      
-    - uses: stefanzweifel/git-auto-commit-action@v5
-      with:
-        commit_message: Automated Change
+    
 
     - name: Run JavaScript script
       run: node .github/workflows/UpdateFiles.js
