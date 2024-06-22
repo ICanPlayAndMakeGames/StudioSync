@@ -16,12 +16,13 @@ jobs:
 
     steps:
     - name: Checkouts
+      id: checkout
       uses: actions/checkout@v4
       with:
         fetch-depth: 2
     
     - name: Axios
-      run: echo ${{github.workspace}}
+      uses: ${{ steps.checkout.outputs.github_workspace }}
 
     - name: Set up Node.js
       uses: actions/setup-node@v4
