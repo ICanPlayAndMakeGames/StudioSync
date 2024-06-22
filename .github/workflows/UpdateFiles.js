@@ -3,6 +3,7 @@ const path = require('path');
 const { execSync } = require('child_process');
 
 const SaveStudio = require('./roblox-api/save');
+const GetStudio = require('./roblox-api/get')
 
 let all_keys = {};
 let sendData = {};
@@ -80,7 +81,7 @@ function createFolderStructure(d, parentPath = 'Game') {
 async function retrieveFiles() {
     try {
         console.log(process.env['api_key']);
-        const response = await fetch(`https://selective-proud-club.glitch.me/GetStudio?uniId=${process.env["uni_id"]}&placeId=${process.env["place_id"]}&api_key=${encodeURIComponent(process.env['api_key'])}`);
+        const response = await GetStudio.main(process.env["uni_id"],process.env["place_id"],process.env['api_key']);
         
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
