@@ -136,7 +136,7 @@ async function sendUpdatedFile(file) {
     if (!file.includes("workflows")) {
         try {
             console.log(NormalFile)
-            const fileExists = await fs.promises.access(NormalFile);
+            const fileExists = await fs.promises.access(file);
             console.log(fileExists)
             if (fileExists) {
                 console.log('File exists, running code...');
