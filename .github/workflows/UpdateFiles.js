@@ -110,7 +110,7 @@ async function UpdateJsonAndSend(file, contents) {
         fs.writeFileSync(path.join(file, 'Details.json'), JSON.stringify(jsonData, null, 2));
         delete jsonData['Name'];
         delete jsonData['Details']['Script']['RunContext'];
-        console.log(jsonData['Details'].keys())
+        console.log(Object.keys(jsonData['Details']))
         delete jsonData['Details']['Script']['Enabled'];
         
         jsonData = { "engineInstance": jsonData };
