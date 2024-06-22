@@ -2,13 +2,19 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
+const SaveStudio = require('./roblox-api/save');
+
 let all_keys = {};
-let sendData = {}
-let sendName = ""
+let sendData = {};
+let sendName = "";
 let files = process.env.Changed_Files.split(" ");
 let deleted_files = process.env.Deleted_Files.split(" ");
 
-const CodeSpaces = ["ServerScriptService", "ServerStorage", "Workspace", "ReplicatedStorage", "ReplicatedFirst", "StarterGui", "StarterPack", "StarterPlayer", "TextChatService", "SoundService", "Teams"];
+const CodeSpaces = [
+    "ServerScriptService", "ServerStorage", "Workspace", "ReplicatedStorage", 
+    "ReplicatedFirst", "StarterGui", "StarterPack", "StarterPlayer", 
+    "TextChatService", "SoundService", "Teams"
+];
 
 execSync('git config --global user.name "github-actions[bot]"');
 execSync('git config --global user.email "github-actions[bot]@users.noreply.github.com"');
@@ -16,18 +22,14 @@ execSync('git config --global user.email "github-actions[bot]@users.noreply.gith
 async function createFiles(data) {
     all_keys = {};
 
-    fs.access('.github/workflows/update.now', fs.constants.F_OK, (err) => { 
-        if (!err) {
-            fs.unlink('.github/workflows/update.now', (err) => {
-                if (err) {
-                    console.error('Error deleting file:', err);
-                    return;
-                }
-                console.log('File deleted successfully');
-            });
-        }
-    });
-  
+    try {
+        await fs.promises.access('.github/workflows/update.now', fs.constants.F_OK);
+        await fs.promises.unlink('.github/workflows/update.now');
+        console.log('File deleted successfully');
+    } catch (err) {
+        console.error('Error deleting file:', err);
+    }
+
     for (const key in data) {
         if (data.hasOwnProperty(key)) {
             createFolderStructure(data[key]);
@@ -86,124 +88,76 @@ async function retrieveFiles() {
     }
 }
 
-async function UpdateJson(file,contents){
-  file = file.replace("/Source.lua","")
-  return fs.access(file,fs.constants.F_OK,async (err) =>{
-    if (!err){
-      return await fs.access(file+"/Details.json",fs.constants.F_OK, async(err) =>{
-        if (!err){
-          return await fs.readFile(file+"/Details.json",'utf-8',async (err,data) =>{
-            if (err) {
-              console.error('Error reading file1:', err);
-              process.exit(1);
-          } else {
-            data = JSON.parse(data)
-            try{
+async function UpdateJsonAndSend(file, contents) {
+    file = file.replace("/Source.lua", "");
+    try {
+        await fs.promises.access(file);
+        const data = await fs.promises.readFile(path.join(file, 'Details.json'), 'utf-8');
+        let jsonData = JSON.parse(data);
+        let fileName = path.basename(file);
 
-              let fileName = file.split("/")
-              fileName = fileName[fileName.length - 1]
-              //contents = text.trim();
-              //if (contents.startsWith('"')) {
-                  //contents = text.slice(1);
-              //}
-             // if (contents.endsWith('"')) {
-                  //contents = text.slice(0, -1);
-              //}
-              data['Details']['Script']['Source'] = contents
-              
-              fs.writeFileSync(file+"/Details.json",JSON.stringify(data, null, 2))
-              delete data['Name'] 
-              delete data['Details']['Script']['RunContext']
-              delete data['Details']['Script']['Enabled']
-              sendData = {"engineInstance":data}
-              
-              sendName = fileName
-              console.log("Send data: ",sendData)
-              return {"engineInstance":data}
-              
-            }catch{
-              console.error('Json file was adjusted in some way recomend to press fix:', err);
-              process.exit(1);
-            }
-          }
-          })
-        }
-      })
+        jsonData['Details']['Script']['Source'] = contents;
+
+        fs.writeFileSync(path.join(file, 'Details.json'), JSON.stringify(jsonData, null, 2));
+        delete jsonData['Name'];
+        delete jsonData['Details']['Script']['RunContext'];
+        delete jsonData['Details']['Script']['Enabled'];
+        
+        jsonData = { "engineInstance": jsonData };
+        console.log("Send data: ", sendData);
+        SaveStudio.SendData(process.env["uni_id"],process.env["place_id"],process.env["api_key"],jsonData,fileName)
+        
+    } catch (err) {
+        console.error('Error updating JSON file:', err);
+        throw err;
     }
-  })
 }
 
 async function sendUpdatedFile(file) {
     if (!file || file === " " || file === "") return;
 
-    let NormalFile = file  
+    let NormalFile = file;
 
     if (file.includes("Game")) {
-        fs.access("keys [DO NOT DELETE].json", fs.constants.F_OK, (err) => {
-            if (!err) {
-                fs.readFile("keys [DO NOT DELETE].json", 'utf8', (err, data) => {
-                    if (err) {
-                        console.error('Error reading file1:', err);
-                        process.exit(1);
-                    } else {
-                        data = JSON.parse(data);
-                        for (const key in data) {
-                            if (file.includes(key)) {
-                                file = file.replace(key, data[key]);
-                            }
-                        }
-                    }
-                });
+        try {
+            const data = await fs.promises.readFile("keys [DO NOT DELETE].json", 'utf8');
+            const keys = JSON.parse(data);
+            for (const key in keys) {
+                if (file.includes(key)) {
+                    file = file.replace(key, keys[key]);
+                }
             }
-        });
+        } catch (err) {
+            console.error('Error reading keys file:', err);
+        }
     }
 
     console.log(file);
 
     if (!file.includes("workflows")) {
-        fs.access(file, fs.constants.F_OK, (err) => {
-            if (!err) {
+        try {
+            const fileExists = await fs.promises.access(file);
+            if (fileExists) {
                 console.log('File exists, running code...');
-                fs.readFile(file, 'utf8', async (err, data) => {
-                    if (err) {
-                        console.error('Error reading file:', err);
-                        process.exit(1);
-                    } else {
-                        console.log('File contents:', JSON.stringify({ contents: data }));
-                        try {
-                            
-                            if (file.includes("Source.lua")){
-                              UpdateJson(NormalFile,data)
-                              await new Promise(resolve => setTimeout(resolve, 750))
-                              console.log(sendData,sendName)
-                            }
+                const data = await fs.promises.readFile(file, 'utf8');
+                console.log('File contents:', JSON.stringify({ contents: data }));
 
-                            fetch(`https://selective-proud-club.glitch.me/UpdateF?uniId=${process.env["uni_id"]}&placeId=${process.env["place_id"]}&api_key=${encodeURIComponent(process.env["api_key"])}`, {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify({ contents: data, deleted: false, file: file, Data: sendData,Name: sendName})
-                            });
-                        } catch (error) {
-                            console.error("Error:", error);
-                        }
-                    }
-                });
-            } else {
-                try {
-                    fetch("https://selective-proud-club.glitch.me/UpdateF", {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({ contents: null, deleted: true, file: file })
-                    });
-                } catch (error) {
-                    console.error("Error:", error);
+                if (file.includes("Source.lua")) {
+                    await UpdateJsonAndSend(NormalFile, data);
+                    
                 }
+
+                /*await fetch(`https://selective-proud-club.glitch.me/UpdateF?uniId=${process.env["uni_id"]}&placeId=${process.env["place_id"]}&api_key=${encodeURIComponent(process.env["api_key"])}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ contents: data, deleted: false, file: file, Data: sendData, Name: sendName })
+                });*/
             }
-        });
+        } catch (err) {
+            console.error('Error reading or updating file:', err);
+        }
     } else if (file.includes("update.now")) {
         retrieveFiles();
     }
