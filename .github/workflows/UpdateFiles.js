@@ -105,7 +105,7 @@ async function UpdateJsonAndSend(file, contents) {
         
         jsonData = { "engineInstance": jsonData };
         console.log("Send data: ", sendData);
-        SaveStudio.SendData(process.env["uni_id"],process.env["place_id"],process.env["api_key"],jsonData,fileName)
+        await SaveStudio.SendData(process.env["uni_id"],process.env["place_id"],process.env["api_key"],jsonData,fileName)
         
     } catch (err) {
         console.error('Error updating JSON file:', err);
