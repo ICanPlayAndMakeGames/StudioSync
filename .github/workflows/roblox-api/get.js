@@ -30,6 +30,11 @@ async function listChildren(instanceId,uni_id,place_id,api_key) {
 
 
 async function getChildrenMain(instanceId,uni_id,place_id,api_key) {
+
+    if (api_key){
+        console.log("Is api key woah")
+    }
+
     const response = await listChildren(instanceId,uni_id,place_id,api_key);
     if (!response) {
         console.log("Failed");
