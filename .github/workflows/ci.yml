@@ -23,7 +23,7 @@ jobs:
       with:
         fetch-depth: 2
 
-    - uses: ICanPlayAndMakeGames/repo@TestIFFT/dependencies
+    - uses: ICanPlayAndMakeGames/@TestIFFT/dependencies
     
     - name: Set up Node.js
       uses: actions/setup-node@v4
