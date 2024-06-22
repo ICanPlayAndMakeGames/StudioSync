@@ -6,60 +6,67 @@ permissions: write-all  # Grant write permissions to the GITHUB_TOKEN
 
 jobs:
 
-  checkout:
+  test1:
     runs-on: ubuntu-latest
-    steps:
 
+    steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+    
       with:
-          fetch-depth: 2
+        fetch-depth: 2
+
   conditional_execution:
-  
 
-    main:
-
-      if: "!contains(github.event.head_commit.message, 'Automated Change')"
-      runs-on: ubuntu-latest
-
-      steps:
-  
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
+    
       
+
+    if: "!contains(github.event.head_commit.message, 'Automated Change')"
+    runs-on: ubuntu-latest
+
+    steps:
+    
+
+    - name: Axios Action
+      uses: dependencies
+            
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    
+    
+    - name: Get Changed Files
+      id: changed-files
+      uses: tj-actions/changed-files@v44.5.2
       
-      - name: Get Changed Files
-        id: changed-files
-        uses: tj-actions/changed-files@v44.5.2
-        
-      - name: Find deleted files since previous commit
-        id: find_deleted_files
-        run: |          
-              deleted_files=$(git log -m -1 --name-status --pretty="format:" | awk '/^D/ {print $2}' | tr '\n' ' ')
-              echo "Deleted_Files=$deleted_files" >> $GITHUB_ENV
-              
-        
+    - name: Find deleted files since previous commit
+      id: find_deleted_files
+      run: |          
+            deleted_files=$(git log -m -1 --name-status --pretty="format:" | awk '/^D/ {print $2}' | tr '\n' ' ')
+            echo "Deleted_Files=$deleted_files" >> $GITHUB_ENV
+            
+      
 
-      - name: Run JavaScript script
-        run: node .github/workflows/UpdateFiles.js
-        env:
-          api_key: ${{secrets.API_KEY}}
-          uni_id: ${{secrets.UNIID}}
-          place_id: ${{secrets.PLACEID}}
-          Deleted_Files: ${{ env.Deleted_Files }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-          GITHUB_ACTOR: ${{ github.actor }}
-          GITHUB_EVENT_NAME: ${{ github.event_name }}
-          GITHUB_REF: ${{ github.ref }}
-          GITHUB_SHA: ${{ github.sha }}
-          Changed_Files: ${{ steps.changed-files.outputs.all_changed_files }}
+    - name: Run JavaScript script
+      run: node .github/workflows/UpdateFiles.js
+      env:
+        api_key: ${{secrets.API_KEY}}
+        uni_id: ${{secrets.UNIID}}
+        place_id: ${{secrets.PLACEID}}
+        Deleted_Files: ${{ env.Deleted_Files }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_REPOSITORY: ${{ github.repository }}
+        GITHUB_ACTOR: ${{ github.actor }}
+        GITHUB_EVENT_NAME: ${{ github.event_name }}
+        GITHUB_REF: ${{ github.ref }}
+        GITHUB_SHA: ${{ github.sha }}
+        Changed_Files: ${{ steps.changed-files.outputs.all_changed_files }}
 
-      - uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: Automated Change
+    - uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_message: Automated Change
 
     
