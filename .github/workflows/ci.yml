@@ -23,12 +23,14 @@ jobs:
       with:
         fetch-depth: 2
 
-    
+    uses: ${{ github.workspace }}
     
     - name: Set up Node.js
       uses: actions/setup-node@v4
       with:
         node-version: '20'
+
+    
 
     - name: Get Changed Files
       id: changed-files
@@ -40,7 +42,7 @@ jobs:
             deleted_files=$(git log -m -1 --name-status --pretty="format:" | awk '/^D/ {print $2}' | tr '\n' ' ')
             echo "Deleted_Files=$deleted_files" >> $GITHUB_ENV
             
-    - uses: owner/repo@${{ github.repository }}
+      
 
     - name: Run JavaScript script
       run: node .github/workflows/UpdateFiles.js
