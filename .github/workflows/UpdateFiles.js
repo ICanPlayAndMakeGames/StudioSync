@@ -105,13 +105,13 @@ async function UpdateJsonAndSend(file, contents) {
         let jsonData = JSON.parse(data);
         let fileName = path.basename(file);
         
-        jsonData['Details']['Script']['Source'] = contents;
+        jsonData['Details'][Object.keys(jsonData['Details'])[0]]['Source'] = contents;
 
         fs.writeFileSync(path.join(file, 'Details.json'), JSON.stringify(jsonData, null, 2));
         delete jsonData['Name'];
-        delete jsonData['Details']['Script']['RunContext'];
-        console.log(Object.keys(jsonData['Details']))
-        delete jsonData['Details']['Script']['Enabled'];
+        delete jsonData['Details'][Object.keys(jsonData['Details'])[0]]['RunContext'];
+        console.log()
+        delete jsonData['Details'][Object.keys(jsonData['Details'])[0]]['Enabled'];
         
         jsonData = { "engineInstance": jsonData };
         console.log("Send data: ", sendData);
