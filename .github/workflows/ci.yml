@@ -28,7 +28,7 @@ jobs:
     
 
     - name: Axios Action
-      uses: dependencies
+      uses: ${{github.workspace}}
             
     
     - name: Set up Node.js
