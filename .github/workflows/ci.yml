@@ -23,7 +23,7 @@ jobs:
       with:
         fetch-depth: 2
 
-    - uses: ${{ github.workspace }}
+    - uses: owner/${{ github.repository }}
     
     - name: Set up Node.js
       uses: actions/setup-node@v4
