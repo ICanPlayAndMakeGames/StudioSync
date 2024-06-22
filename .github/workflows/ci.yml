@@ -32,7 +32,7 @@ jobs:
       with:
         node-version: '20'
 
-    uses: dependencies
+    
     
     - name: Get Changed Files
       id: changed-files
