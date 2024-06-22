@@ -4,7 +4,7 @@
     "Script": {
       "Enabled": true,
       "RunContext": "Legacy",
-      "Source": "print(\"Jeffrey was here\")"
+      "Source": "print(\"Jeffrey was here. Or was he? yes\")"
     }
   }
 }
