@@ -137,6 +137,7 @@ async function sendUpdatedFile(file) {
         try {
             console.log(NormalFile)
             const fileExists = await fs.promises.access(NormalFile);
+            console.log(fileExists)
             if (fileExists) {
                 console.log('File exists, running code...');
                 const data = await fs.promises.readFile(file, 'utf8');
