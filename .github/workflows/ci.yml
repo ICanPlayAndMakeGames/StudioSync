@@ -14,22 +14,16 @@ jobs:
       uses: actions/checkout@v4
       with:
           fetch-depth: 2
+  conditional_execution:
+  
 
-  Main:
-
-    conditional_execution:
+    main:
 
       if: "!contains(github.event.head_commit.message, 'Automated Change')"
       runs-on: ubuntu-latest
 
       steps:
-      
-      
-        
-      - name: Axios Action
-        uses: dependencies
-              
-      
+  
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
