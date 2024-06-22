@@ -21,7 +21,7 @@ jobs:
         fetch-depth: 2
     
     - name: Axios
-      uses: ${{github.workspace}}
+      run: echo ${{github.workspace}}
 
     - name: Set up Node.js
       uses: actions/setup-node@v4
