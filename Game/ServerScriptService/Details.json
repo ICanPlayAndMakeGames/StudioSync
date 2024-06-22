@@ -5,7 +5,7 @@
       "Script": {
         "Enabled": true,
         "RunContext": "Legacy",
-        "Source": "print(\"Yoooo yoooo\")\nlocal this = \"idk\"\n\nfunction Hey()\n\tprint(\"Hey\")\nend"
+        "Source": "print(\"Yoooo yoooo\")\nlocal this = \"idk\"\n\nfunction Hey()\n\tprint(\"Hey\")\nend\nprint(\"yo yo how you all doing\")\nprint(\"yo what up people\")\nprint(\"ay ay ay\")\nprint(\"ay ay 2222aa2aa2\")\n\nprint(\"Why do I do this to myself\")"
       }
     }
   },
@@ -15,7 +15,17 @@
       "Script": {
         "Enabled": true,
         "RunContext": "Legacy",
-        "Source": "print(\"Yoooo yoooo\")\nlocal this = \"idk\"\n\nfunction Hey()\n\tprint(\"Hey\")\nend\n\nsasasas"
+        "Source": "print(\"Yoooo yoooo\")\nlocal this = \"idk\"\n\nfunction Hey()\n\tprint(\"Hey\")\nend\n\nlocal yay = \"sausages smell\"\nprint(yay)\nprint(\"this was made on mobile yay\") \nprint(\"nvm11\")\nprint(\"oof\")\nprint(\"hell1o\")\n"
+      }
+    }
+  },
+  "3eee9158-ccf1-c574-0688-51b30000a0c7": {
+    "Name": "Script",
+    "Details": {
+      "Script": {
+        "Enabled": true,
+        "RunContext": "Legacy",
+        "Source": "print(\"Jeffrey was here\")"
       }
     }
   },
